@@ -5,6 +5,11 @@ import 'package:words/user_session/presenter/pages/splash_page.dart';
 
 class AppModule extends Module {
 
+  @override
+  List<Bind<Object>> get binds => [
+
+
+  ];
 
   @override
   List<ModularRoute> get routes => [
