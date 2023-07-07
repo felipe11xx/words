@@ -35,6 +35,8 @@ dependencies:
   flutter_screenutil: ^5.8.4
   hive: ^2.2.3
   dartz: ^0.10.1
+  text_to_speech: ^0.2.3
+  equatable: ^2.0.5
 
   #Firebase
   firebase_core: ^2.1.1

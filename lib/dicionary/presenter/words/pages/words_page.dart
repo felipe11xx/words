@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:words/dicionary/presenter/words/pages/words_tab.dart';
 
 class WordsPage extends StatefulWidget {
   const WordsPage({super.key});
@@ -10,10 +11,10 @@ class WordsPage extends StatefulWidget {
 class _WordsPageState extends State<WordsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: Colors.red,
-      ),
+    return const Scaffold(
+      body:  WordsTab(),
     );
   }
+
+
 }
