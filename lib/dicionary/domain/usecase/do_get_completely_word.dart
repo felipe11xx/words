@@ -7,11 +7,11 @@ abstract class IDoGetCompletelyWordUseCase {
   Future<Either<FailureWord, WordCompleted>> call(String? word);
 }
 
-class DoGetCompletelyWord implements IDoGetCompletelyWordUseCase {
+class DoGetCompletelyWordUseCase implements IDoGetCompletelyWordUseCase {
 
   final IGetCompletelyWordRepository _getCompletelyWordRepository;
 
-  DoGetCompletelyWord({required IGetCompletelyWordRepository iGetCompletelyWordRepository}):_getCompletelyWordRepository = iGetCompletelyWordRepository;
+  DoGetCompletelyWordUseCase({required IGetCompletelyWordRepository iGetCompletelyWordRepository}):_getCompletelyWordRepository = iGetCompletelyWordRepository;
 
   @override
   Future<Either<FailureWord, WordCompleted>> call(String? word) {

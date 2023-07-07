@@ -6,10 +6,10 @@ import 'package:words/dicionary/domain/repositories/get_completely_word_reposito
 
 import '../../../shared/resources/strings.dart';
 
-class GetCompletelyWord implements IGetCompletelyWordRepository {
+class GetCompletelyWordImpl implements IGetCompletelyWordRepository {
   final IDoGetCompletelyWordDataSource dataSource;
 
-  GetCompletelyWord(this.dataSource);
+  GetCompletelyWordImpl(this.dataSource);
 
   @override
   Future<Either<FailureWord, WordCompleted>> getCompletelyWord(String? word) async {
