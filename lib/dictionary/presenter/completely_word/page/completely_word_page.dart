@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../../shared/resources/strings.dart';
 import '../cubit/completely_word_state.dart';
 import '../cubit/completely_word_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:text_to_speech/text_to_speech.dart';
+import '../../../../shared/resources/strings.dart';
+import 'package:words/dictionary/data/model/models.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../shared/widgets/app_progress_indicator.dart';
 
@@ -15,13 +15,13 @@ class CompletelyWordPage extends StatefulWidget {
 }
 
 class _CompletelyWordPageState extends State<CompletelyWordPage> {
+  late WordCompleted wordCompleted;
+
   @override
   void initState() {
-    context.read<CompletelyWordCubit>().getCompletelyWord('Hello');
+    context.read<CompletelyWordCubit>().getCompletelyWord('flavor');
     super.initState();
   }
-
-  TextToSpeech tts = TextToSpeech();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,12 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
 
   _blocConsumer() {
     return BlocConsumer<CompletelyWordCubit, CompletelyWordState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if(state is CompleteWordSuccessState){
+            wordCompleted = state.prop;
+          }
+
+        },
         builder: (context, state) {
           if (state is CompleteWordLoadingState) {
             return Center(
@@ -71,23 +76,24 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
     return Column(
       children: [
         Container(
-          child: Column(
+          color: Colors.white,
+          child:  Column(
             children: [
-              Text('Hello'),
-              Text('hɛ\'loʊ'),
+              Text(wordCompleted.word ?? ''),
+              Text(wordCompleted.pronunciation?.all ?? ''),
             ],
           ),
         ),
         IconButton(
           onPressed: () {
-            tts.speak('Eu consigo Falar');
+            context.read<CompletelyWordCubit>().speak(wordCompleted.word ?? '');
           },
           icon: const Icon(Icons.play_arrow_outlined),
           color: Colors.black,
           iconSize: 100.w,
         ),
-        Text(Strings.meanings),
-        Text('Verb - LOREM IPSUM'),
+       const Text(Strings.meanings),
+        Text(wordCompleted.results?[0].definition ?? ''),
         Row(
           children: [
             GestureDetector(

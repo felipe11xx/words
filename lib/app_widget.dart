@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:words/user_session/presenter/pages/splash_page.dart';
-
-import 'shared/navigation/routes.dart';
 import 'shared/resources/strings.dart';
+import 'package:words/shared/theme/colors.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
@@ -30,8 +28,8 @@ class _AppWidgetState extends State<AppWidget> {
           title: Strings.wordsApp,
           theme: ThemeData(
             brightness: Brightness.light,
-            primarySwatch: Colors.red,
-            cardColor: Colors.grey[200],
+            primarySwatch:  AppColors.primary_light,
+            cardColor: AppColors.neutral,
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
           routeInformationParser: Modular.routeInformationParser,

@@ -8,7 +8,7 @@ class WordCompleted {
   double? frequency;
 
   WordCompleted(
-      {this.word,
+      {this.word = '',
       this.results,
       this.syllables,
       this.pronunciation,
