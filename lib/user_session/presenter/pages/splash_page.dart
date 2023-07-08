@@ -12,7 +12,9 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
+
     Future.delayed(const Duration(milliseconds: 5000), () {
+
       Modular.to.navigate(Routes.words);
     });
 

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:words/dicionary/presenter/words/pages/word_item.dart';
+import 'package:words/dictionary/presenter/words/pages/word_item.dart';
 
 class WordsTab extends StatelessWidget {
   const WordsTab({super.key});

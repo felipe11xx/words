@@ -1,22 +1,27 @@
+
 import 'shared/navigation/routes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'dicionary/presenter/words/pages/words_page.dart';
-import 'dicionary/external/get_completely_word_external.dart';
-import 'dicionary/domain/usecase/do_get_completely_word.dart';
-import 'dicionary/data/repository/get_completely_word_impl.dart';
+import 'dictionary/presenter/words/pages/words_page.dart';
+import 'dictionary/external/get_completely_word_external.dart';
+import 'dictionary/domain/usecase/do_get_completely_word.dart';
+import 'dictionary/data/repository/get_completely_word_impl.dart';
 import 'package:words/user_session/presenter/pages/splash_page.dart';
-import 'dicionary/presenter/word_completely/cubit/word_completely_cubit.dart';
+import 'dictionary/presenter/completely_word/page/completely_word_page.dart';
+import 'dictionary/presenter/completely_word/cubit/completely_word_cubit.dart';
+import 'shared/network/custom_dio.dart';
 
 
 class AppModule extends Module {
 
   @override
   List<Bind<Object>> get binds => [
+    Bind((i) => CustomDio()),
    //get Word Completely
-   Bind((i) =>  DoGetCompletelyWordUseCase(iGetCompletelyWordRepository: i())),
-   Bind((i) =>  GetCompletelyWordImpl(i())),
-   Bind((i) =>  DoGetCompletelyWordExternal(i())),
-    $WordCompletelyCubit;
+   Bind.singleton((i) =>  DoGetCompletelyWordExternal(i())),
+   Bind.singleton((i) =>  DoGetCompletelyWordUseCase(iGetCompletelyWordRepository: i())),
+   Bind.singleton((i) =>  GetCompletelyWordImpl(i())),
+   $CompletelyWordCubit,
   ];
 
   @override
@@ -28,7 +33,14 @@ class AppModule extends Module {
 
     ChildRoute(Routes.words,
          transition: TransitionType.rightToLeftWithFade,
-        child:(_,__) => const WordsPage())
+        child:(_,__) => const WordsPage()),
+
+    ChildRoute(Routes.wordCompletely,
+         transition: TransitionType.rightToLeftWithFade,
+        child:(_,__) => BlocProvider.value(
+          value: Modular.get<CompletelyWordCubit>(),
+          child: const CompletelyWordPage(),
+        ),)
 
   ];
 }

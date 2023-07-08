@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:words/dicionary/data/model/models.dart';
-import 'package:words/dicionary/domain/error/failure_word.dart';
-import 'package:words/dicionary/domain/repositories/get_completely_word_repository.dart';
+import 'package:words/dictionary/data/model/models.dart';
+import 'package:words/dictionary/domain/error/failure_word.dart';
+import 'package:words/dictionary/domain/repositories/get_completely_word_repository.dart';
 
 abstract class IDoGetCompletelyWordUseCase {
   Future<Either<FailureWord, WordCompleted>> call(String? word);

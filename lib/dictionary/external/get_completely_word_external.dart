@@ -1,12 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:words/dicionary/data/datasource/get_completely_word.dart';
-import 'package:words/dicionary/data/model/word_completed.dart';
-import 'package:words/shared/network/urls.dart';
-
-import '../../shared/network/custom_dio.dart';
-import '../../shared/resources/strings.dart';
 import '../domain/error/error_body.dart';
 import '../domain/error/failure_word.dart';
+import '../../shared/resources/strings.dart';
+import '../../shared/network/custom_dio.dart';
+import 'package:words/shared/network/urls.dart';
+import 'package:words/dictionary/data/model/word_completed.dart';
+import 'package:words/dictionary/data/datasource/get_completely_word.dart';
 
 class DoGetCompletelyWordExternal implements IDoGetCompletelyWordDataSource {
   final CustomDio customDio;
@@ -16,20 +15,18 @@ class DoGetCompletelyWordExternal implements IDoGetCompletelyWordDataSource {
   @override
   Future<WordCompleted> doGetCompletelyWord(String? word) async {
     try {
-      // final response = await customDio.get(
-      //   '${Urls.wordsApiGet}$word',
-        final response = await customDio.get(
-        '${Urls.wordsApiGet}light',
+      final response = await customDio.get(
+        '${Urls.wordsApiGet}$word',
       );
 
       if (response.statusCode == 200) {
-        return response.data;
+        return WordCompleted.fromJson(response.data);
       } else {
         throw CompletelyWordDataSourceError(
           message: response.statusMessage,
         );
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       var error = ErrorBody.fromMap(e.response?.data);
       throw CompletelyWordDataSourceError(
         message: error.message,

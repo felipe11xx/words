@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:words/dicionary/data/model/word_completed.dart';
-import 'package:words/dicionary/domain/error/failure_word.dart';
-import 'package:words/dicionary/data/datasource/get_completely_word.dart';
-import 'package:words/dicionary/domain/repositories/get_completely_word_repository.dart';
-
 import '../../../shared/resources/strings.dart';
+import 'package:words/dictionary/data/model/word_completed.dart';
+import 'package:words/dictionary/domain/error/failure_word.dart';
+import 'package:words/dictionary/data/datasource/get_completely_word.dart';
+import 'package:words/dictionary/domain/repositories/get_completely_word_repository.dart';
 
 class GetCompletelyWordImpl implements IGetCompletelyWordRepository {
   final IDoGetCompletelyWordDataSource dataSource;

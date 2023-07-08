@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:words/dicionary/presenter/words/pages/words_tab.dart';
+import 'package:words/dictionary/presenter/words/pages/words_tab.dart';
 
 class WordsPage extends StatefulWidget {
   const WordsPage({super.key});

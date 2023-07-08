@@ -4,6 +4,6 @@ class Routes {
 
   static const words = "/words";
 
-  static const word = "/word";
+  static const wordCompletely = "/wordCompletely";
 
 }
