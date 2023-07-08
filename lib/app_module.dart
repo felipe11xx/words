@@ -1,6 +1,7 @@
 import 'shared/navigation/routes.dart';
 import 'shared/network/custom_dio.dart';
 import 'shared/services/tts_service.dart';
+import 'shared/services/prefs_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'dictionary/presenter/words/pages/words_page.dart';
@@ -16,7 +17,9 @@ class AppModule extends Module {
   List<Bind<Object>> get binds => [
         Bind((i) => CustomDio()),
         Bind((i) => AppTTS()),
-        //get Word Completely
+        Bind((i) => Prefs()),
+
+    //get Word Completely
         Bind.singleton((i) => DoGetCompletelyWordExternal(i())),
         Bind.singleton((i) =>
             DoGetCompletelyWordUseCase(iGetCompletelyWordRepository: i())),

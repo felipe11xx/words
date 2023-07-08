@@ -3,8 +3,8 @@ class Strings {
   static const wordsApp = "Words";
 
   //errors
-  ///Desculpe Ocorreu um erro :/
-  static const genericError = 'Desculpe Ocorreu um erro :/ ';
+  ///Sorry an Error has occurred :/
+  static const genericError = 'Sorry an Error has occurred :/ ';
 
   //commons
   ///Meanings
@@ -18,4 +18,13 @@ class Strings {
 
   ///Listen
   static const listen = 'Listen';
+
+  ///Dictionary
+  static const dictionary = 'Dictionary';
+
+  ///Historic
+  static const historic = 'Historic';
+
+  ///Dictionary
+  static const favorites = 'Favorites';
 }

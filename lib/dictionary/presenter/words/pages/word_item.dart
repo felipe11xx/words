@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:words/shared/theme/typography.dart';
 
 import '../../../../shared/navigation/routes.dart';
 
@@ -18,11 +19,14 @@ class WordItem extends StatelessWidget {
       decoration:
           BoxDecoration(border: Border.all(color: Colors.black, width: 1.w)),
       child: GestureDetector(
-        onTap: (){
+        onTap: () {
           Modular.to.pushNamed(Routes.wordCompletely);
         },
         child: Center(
-          child: Text(word),
+          child: Text(
+            word,
+            style: AppTextStyles.bodyLarge,
+          ),
         ),
       ),
     );
