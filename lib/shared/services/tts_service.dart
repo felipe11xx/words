@@ -7,4 +7,14 @@ class AppTTS extends TextToSpeech {
     speak(word);
   }
 
+  speakES(String word){
+    setLanguage('es-ES');
+    speak(word);
+  }
+
+  speakPT(String word){
+    setLanguage('pt-BR');
+    speak(word);
+  }
+
 }
