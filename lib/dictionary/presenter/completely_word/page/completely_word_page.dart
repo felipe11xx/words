@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../shared/resources/strings.dart';
 import '../cubit/completely_word_state.dart';
 import '../cubit/completely_word_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +20,7 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
     context.read<CompletelyWordCubit>().getCompletelyWord('Hello');
     super.initState();
   }
+
   TextToSpeech tts = TextToSpeech();
 
   @override
@@ -65,11 +67,37 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
         });
   }
 
-  _body(){
+  _body() {
     return Column(
       children: [
-        Container(),
-        IconButton(onPressed: (){tts.speak('Eu consigo Falar');}, icon:const Icon(Icons.play_arrow_outlined), color: Colors.black,iconSize: 100.w,)
+        Container(
+          child: Column(
+            children: [
+              Text('Hello'),
+              Text('hɛ\'loʊ'),
+            ],
+          ),
+        ),
+        IconButton(
+          onPressed: () {
+            tts.speak('Eu consigo Falar');
+          },
+          icon: const Icon(Icons.play_arrow_outlined),
+          color: Colors.black,
+          iconSize: 100.w,
+        ),
+        Text(Strings.meanings),
+        Text('Verb - LOREM IPSUM'),
+        Row(
+          children: [
+            GestureDetector(
+              child: const  Text(Strings.back),
+            ),
+            GestureDetector(
+              child: const  Text(Strings.next),
+            ),
+          ],
+        )
       ],
     );
   }
