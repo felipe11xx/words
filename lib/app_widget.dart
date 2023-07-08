@@ -28,7 +28,7 @@ class _AppWidgetState extends State<AppWidget> {
           title: Strings.wordsApp,
           theme: ThemeData(
             brightness: Brightness.light,
-            primarySwatch:  AppColors.primary_light,
+            primarySwatch:  AppColors.secondary_light,
             cardColor: AppColors.neutral,
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),

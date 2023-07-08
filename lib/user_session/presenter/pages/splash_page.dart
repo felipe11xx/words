@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:words/shared/theme/colors.dart';
+import 'package:words/shared/theme/typography.dart';
 import '../../../shared/navigation/routes.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import '../../../shared/resources/strings.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -15,7 +19,7 @@ class _SplashPageState extends State<SplashPage> {
 
     Future.delayed(const Duration(milliseconds: 5000), () {
 
-      Modular.to.navigate(Routes.words);
+      Modular.to.pushNamed(Routes.dictionary);
     });
 
     super.initState();
@@ -25,9 +29,9 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return  Scaffold(
         body: Container(
-      color: Colors.amber,
-      child: const Center(
-        child: Text('olá Mundo'),
+      color: AppColors.secondary_light,
+      child:  Center(
+        child: Text(Strings.presentation, style: AppTextStyles.headH4.copyWith(color: AppColors.white),textAlign: TextAlign.center,),
       ),
     ));
   }

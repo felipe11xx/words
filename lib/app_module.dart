@@ -19,7 +19,7 @@ class AppModule extends Module {
         Bind((i) => AppTTS()),
         Bind((i) => Prefs()),
 
-    //get Word Completely
+        //get Word Completely
         Bind.singleton((i) => DoGetCompletelyWordExternal(i())),
         Bind.singleton((i) =>
             DoGetCompletelyWordUseCase(iGetCompletelyWordRepository: i())),
@@ -29,12 +29,16 @@ class AppModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        ChildRoute(Routes.defaultRoute,
-            transition: TransitionType.rightToLeftWithFade,
-            child: (_, __) => const SplashPage()),
-        ChildRoute(Routes.words,
-            transition: TransitionType.rightToLeftWithFade,
-            child: (_, __) => const WordsPage()),
+        ChildRoute(
+          Routes.defaultRoute,
+          transition: TransitionType.rightToLeftWithFade,
+          child: (_, __) => const SplashPage(),
+        ),
+        ChildRoute(
+          Routes.dictionary,
+          transition: TransitionType.rightToLeftWithFade,
+          child: (_, __) => const DictionaryPage(),
+        ),
         ChildRoute(
           Routes.wordCompletely,
           transition: TransitionType.rightToLeftWithFade,

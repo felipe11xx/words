@@ -27,4 +27,7 @@ class Strings {
 
   ///Dictionary
   static const favorites = 'Favorites';
+
+  ///Welcome this a english dictionary app :)'
+  static const presentation = 'Welcome this a english dictionary app :)';
 }

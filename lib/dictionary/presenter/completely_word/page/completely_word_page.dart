@@ -35,13 +35,16 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
     return Scaffold(
       appBar: AppBar(
           leading: IconButton(
-        color: Colors.black,
+        color: AppColors.white,
         onPressed: () {
           Navigator.pop(context);
         },
         icon: const Icon(Icons.close),
       )),
-      body: _blocConsumer(),
+      body: Container(
+        color: AppColors.primary_light[100],
+
+        child: _blocConsumer(),) ,
     );
   }
 
@@ -56,7 +59,7 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
       if (state is CompleteWordLoadingState) {
         return Center(
           child: AppProgressIndicator(
-            color: Colors.green,
+            color: AppColors.secondary_light,
             width: 100.w,
             height: 100.w,
           ),
@@ -99,7 +102,7 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
             color: AppColors.neutral_70,
           ),
           borderRadius: BorderRadius.all(Radius.circular(12.r)),
-          color: AppColors.primary_light[200]),
+          color: AppColors.secondary_light[200]),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -134,7 +137,7 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
 
         },
         icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border,size:  32.w,),
-        color: AppColors.secondary_light[700],
+        color: AppColors.white,
       ),
     );
   }
@@ -153,12 +156,12 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
               textButton: Strings.listen,
               icon: Icon(
                 Icons.play_arrow_rounded,
-                color: AppColors.black,
+                color: AppColors.white,
                 size: 32.w,
               ),
               fit: BoxFit.fitWidth,
-              color: AppColors.primary_light[600],
-              style: AppTextStyles.bodyLargeBold,
+              color: AppColors.secondary_light[600],
+              style: AppTextStyles.bodyLargeBold.copyWith(color: AppColors.white),
             ),
           ),
         ],
@@ -208,8 +211,8 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
             },
             textButton: Strings.back,
             fit: BoxFit.fitHeight,
-            color: AppColors.primary_light[600],
-            style: AppTextStyles.bodyLargeBold,
+            color: AppColors.secondary_light[600],
+            style: AppTextStyles.bodyLargeBold.copyWith(color: AppColors.white),
           ),
           AppSquareButton(
             onTap: () {
@@ -219,8 +222,8 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
             },
             textButton: Strings.next,
             fit: BoxFit.fitHeight,
-            color: AppColors.primary_light[600],
-            style: AppTextStyles.bodyLargeBold,
+            color: AppColors.secondary_light[600],
+            style: AppTextStyles.bodyLargeBold.copyWith(color: AppColors.white),
           ),
         ],
       ),
