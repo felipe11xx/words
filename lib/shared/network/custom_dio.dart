@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:words/shared/network/api_keys.dart';
 
 class CustomDio extends DioForNative {
   CustomDio() {
@@ -23,7 +24,7 @@ class CustomInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     debugPrint("##### Log _onRequest CustomDio #### ${options.path}");
 
-    options.headers['X-RapidAPI-Key'] = '21d7c904eemsh5a476de504103f7p1f07fajsnd5337b83a04d';
+    options.headers['X-RapidAPI-Key'] = ApiKeys.rapidApikey;
     options.headers['X-RapidAPI-Host'] = 'wordsapiv1.p.rapidapi.com';
 
     super.onRequest(options, handler);

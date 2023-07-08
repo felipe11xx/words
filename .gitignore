@@ -299,3 +299,6 @@ ios/.DS_Store
 lib/.DS_Store
 assets/.DS_Store
 .DS_Store
+
+#API KEY FILE
+lib/shared/network/api_keys.dart
