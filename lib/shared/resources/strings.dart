@@ -13,6 +13,9 @@ class Strings {
   ///Back
   static const back = 'Back';
 
-  ///c
+  ///Next
   static const next = 'Next';
+
+  ///Listen
+  static const listen = 'Listen';
 }

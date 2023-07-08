@@ -16,7 +16,7 @@ class CompletelyWordCubit extends Cubit<CompletelyWordState> {
 
   final DoGetCompletelyWordUseCase wordUseCase;
   final AppTTS tts;
-  late WordCompleted wordCompleted;
+  late List<String?> meanings;
 
   getCompletelyWord(String? word) async {
     emit(CompleteWordLoadingState(true));
@@ -26,9 +26,9 @@ class CompletelyWordCubit extends Cubit<CompletelyWordState> {
     result.fold(
       (l) => emit(CompleteWordErrorState(l as CompletelyWordDataSourceError)),
       (r) {
-        wordCompleted = r;
+
         emit(
-          CompleteWordSuccessState(r),
+          CompleteWordSuccessState(r, _getMeanings(r)),
         );
       },
     );
@@ -36,7 +36,7 @@ class CompletelyWordCubit extends Cubit<CompletelyWordState> {
 
   speak(String word) => tts.speakEN(word);
 
-  List<String?> getMeanings() {
+  List<String?> _getMeanings(WordCompleted wordCompleted) {
     List<String?> meanings = [];
     wordCompleted.results?.forEach((element) {
       meanings.add(element.definition);
