@@ -5,6 +5,7 @@ import 'package:words/dictionary/presenter/words/pages/words_tab.dart';
 import 'package:words/shared/theme/colors.dart';
 import 'package:words/shared/theme/typography.dart';
 import '../../../../shared/resources/strings.dart';
+import '../../../../shared/services/real_time_data_base_service.dart';
 
 class DictionaryPage extends StatefulWidget {
   const DictionaryPage({super.key});
@@ -14,6 +15,16 @@ class DictionaryPage extends StatefulWidget {
 }
 
 class _DictionaryPageState extends State<DictionaryPage> {
+
+  final RealTimeDataBaseService _realTimeDataBaseService =RealTimeDataBaseService() ;
+
+  @override
+  void initState() {
+    _realTimeDataBaseService.getWords();
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

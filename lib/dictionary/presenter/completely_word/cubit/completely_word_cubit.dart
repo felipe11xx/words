@@ -1,10 +1,9 @@
-import 'package:words/dictionary/data/model/models.dart';
-
 import 'completely_word_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/error/failure_word.dart';
 import '../../../../shared/services/tts_service.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:words/dictionary/data/model/models.dart';
 import 'package:words/dictionary/domain/usecase/do_get_completely_word.dart';
 
 final $CompletelyWordCubit =

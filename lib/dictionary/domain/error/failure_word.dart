@@ -6,4 +6,5 @@ class CompletelyWordDataSourceError implements FailureWord {
   final String? message;
 
   CompletelyWordDataSourceError({this.message});
+
 }
