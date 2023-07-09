@@ -18,7 +18,6 @@ class AllWordsCubit extends Cubit<AllWordsState> {
 
    try {
      var result = await _realTimeDataBaseService.getWords();
-
      emit(AllWordsSuccessState(result ));
    } catch (e){
      emit(AllWordsErrorState(e as Exception));

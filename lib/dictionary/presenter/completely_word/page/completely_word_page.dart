@@ -76,7 +76,7 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
         return AppErrorScreen(
             icon: state.prop.is404 ? SvgPaths.icon404 : SvgPaths.errorIcon,
             error: state.prop.message,
-            buttonText: state.prop.is404 ? Strings.back :Strings.tryAgain,
+            buttonText: state.prop.is404 ? Strings.back : Strings.tryAgain,
             onPressed: () {
               state.prop.is404
                   ? Modular.to.pop()
@@ -85,9 +85,11 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
                       .getCompletelyWord(widget.word);
             });
       } else {
-        return  AppErrorScreen(onPressed:context
-            .read<CompletelyWordCubit>()
-            .getCompletelyWord(widget.word) ,);
+        return AppErrorScreen(
+          onPressed: () {
+            context.read<CompletelyWordCubit>().getCompletelyWord(widget.word);
+          },
+        );
       }
     });
   }

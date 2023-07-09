@@ -20,8 +20,8 @@ class RealTimeDataBaseService {
 
       return keys;
     } catch (e) {
-      debugPrint(" Erro ao acessar RealTime data base ${e.toString()}");
+      throw Exception(e.toString());
     }
-    return [];
+
   }
 }

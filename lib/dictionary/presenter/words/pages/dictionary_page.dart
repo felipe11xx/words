@@ -8,6 +8,7 @@ import 'package:words/dictionary/presenter/words/pages/historic_tab.dart';
 import 'package:words/dictionary/presenter/words/pages/words_tab.dart';
 import 'package:words/shared/theme/colors.dart';
 import 'package:words/shared/theme/typography.dart';
+import 'package:words/shared/widgets/app_error_screen.dart';
 import '../../../../shared/resources/strings.dart';
 import '../../../../shared/widgets/app_progress_indicator.dart';
 
@@ -19,13 +20,11 @@ class DictionaryPage extends StatefulWidget {
 }
 
 class _DictionaryPageState extends State<DictionaryPage> {
-
   @override
   void initState() {
     context.read<AllWordsCubit>().getWords();
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,10 @@ class _DictionaryPageState extends State<DictionaryPage> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title:  Text(Strings.dictionary,style: AppTextStyles.headH6.copyWith(color: AppColors.white),),
+          title: Text(
+            Strings.dictionary,
+            style: AppTextStyles.headH6.copyWith(color: AppColors.white),
+          ),
           centerTitle: true,
           bottom: TabBar(tabs: [
             Tab(
@@ -57,30 +59,40 @@ class _DictionaryPageState extends State<DictionaryPage> {
           ]),
         ),
         body: BlocConsumer<AllWordsCubit, AllWordsState>(
-          listener: (context, state){},
-          builder: (context, state){
-            if (state is AllWordsStateLoadingState){
-              return Center(
-                child: AppProgressIndicator(
-                  color: AppColors.secondary_light,
-                  width: 100.w,
-                  height: 100.w,
-                ),
-              );
-            }
-            if(state is AllWordsSuccessState){
-              return TabBarView(
-                children: [
-                  WordsTab(words: state.list,),
-                  HistoricTab(),
-                  FavoritesTab(),
-                ],
-              );
-            }
+            listener: (context, state) {},
+            builder: (context, state) {
+              if (state is AllWordsStateLoadingState) {
+                return Center(
+                  child: AppProgressIndicator(
+                    color: AppColors.secondary_light,
+                    width: 100.w,
+                    height: 100.w,
+                  ),
+                );
+              }
+              if (state is AllWordsSuccessState) {
+                return TabBarView(
+                  children: [
+                    WordsTab(
+                      words: state.list,
+                    ),
+                    HistoricTab(),
+                    FavoritesTab(),
+                  ],
+                );
+              }
+              if (state is AllWordsErrorState) {
+                return AppErrorScreen(
+                    error: state.exception.toString(),
+                    onPressed: () {
+                  context.read<AllWordsCubit>().getWords();
+                });
+              }
 
-          return const SizedBox.shrink();
-          }
-        ),
+              return AppErrorScreen(onPressed: () {
+                context.read<AllWordsCubit>().getWords();
+              });
+            }),
       ),
     );
   }
