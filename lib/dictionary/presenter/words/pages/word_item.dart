@@ -8,7 +8,7 @@ import '../../../../shared/navigation/routes.dart';
 class WordItem extends StatelessWidget {
   const WordItem({super.key, required this.word});
 
-  final String word;
+  final String? word;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class WordItem extends StatelessWidget {
             BoxDecoration(border: Border.all(color: Colors.black, width: 1.w)),
         child: Center(
           child: Text(
-            word,
+            word ?? '',
             style: AppTextStyles.bodyLarge,
           ),
         ),

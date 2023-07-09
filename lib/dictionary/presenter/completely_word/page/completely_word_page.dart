@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:words/dictionary/presenter/completely_word/page/meaning_item.dart';
-import 'package:words/shared/theme/colors.dart';
-import 'package:words/shared/theme/typography.dart';
 import '../cubit/completely_word_state.dart';
 import '../cubit/completely_word_cubit.dart';
+import 'package:words/shared/theme/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../shared/resources/strings.dart';
+import 'package:words/shared/theme/typography.dart';
+import 'package:words/shared/resources/svg_paths.dart';
 import 'package:words/dictionary/data/model/models.dart';
 import '../../../../shared/widgets/app_square_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:words/shared/widgets/app_error_screen.dart';
 import '../../../../shared/widgets/app_progress_indicator.dart';
+import 'package:flutter_modular/flutter_modular.dart'
+    hide ModularWatchExtension;
+import 'package:words/dictionary/presenter/completely_word/page/meaning_item.dart';
 
 class CompletelyWordPage extends StatefulWidget {
   const CompletelyWordPage({super.key, required this.word});
+
   final String word;
+
   @override
   State<CompletelyWordPage> createState() => _CompletelyWordPageState();
 }
@@ -43,8 +49,8 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
       )),
       body: Container(
         color: AppColors.primary_light[100],
-
-        child: _blocConsumer(),) ,
+        child: _blocConsumer(),
+      ),
     );
   }
 
@@ -64,18 +70,25 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
             height: 100.w,
           ),
         );
-      }
-      if (state is CompleteWordSuccessState) {
+      } else if (state is CompleteWordSuccessState) {
         return _body();
+      } else if (state is CompleteWordErrorState) {
+        return AppErrorScreen(
+            icon: state.prop.is404 ? SvgPaths.icon404 : SvgPaths.errorIcon,
+            error: state.prop.message,
+            buttonText: state.prop.is404 ? Strings.back :Strings.tryAgain,
+            onPressed: () {
+              state.prop.is404
+                  ? Modular.to.pop()
+                  : context
+                      .read<CompletelyWordCubit>()
+                      .getCompletelyWord(widget.word);
+            });
+      } else {
+        return  AppErrorScreen(onPressed:context
+            .read<CompletelyWordCubit>()
+            .getCompletelyWord(widget.word) ,);
       }
-      if (state is CompleteWordLoadingState) {
-        return Container(
-          color: Colors.red,
-        );
-      }
-      return Container(
-        color: Colors.black,
-      );
     });
   }
 
@@ -96,7 +109,6 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
     return Container(
       margin: EdgeInsets.all(16.w),
       width: 350.w,
-
       decoration: BoxDecoration(
           border: Border.all(
             color: AppColors.neutral_70,
@@ -106,16 +118,18 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Row(children: [_favoriteButton()],),
+          Row(
+            children: [_favoriteButton()],
+          ),
           Padding(
-            padding: EdgeInsets.only(top: 16.w,bottom:16.w),
+            padding: EdgeInsets.only(top: 16.w, bottom: 16.w),
             child: Text(
               wordCompleted.word ?? '',
               style: AppTextStyles.headH2,
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 16.w,bottom: 32.w),
+            padding: EdgeInsets.only(top: 16.w, bottom: 32.w),
             child: Text(
               wordCompleted.pronunciation?.all ?? '',
               style: TextStyle(fontSize: 54.sp),
@@ -134,13 +148,16 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
           setState(() {
             isFavorite = !isFavorite;
           });
-
         },
-        icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border,size:  32.w,),
+        icon: Icon(
+          isFavorite ? Icons.favorite : Icons.favorite_border,
+          size: 32.w,
+        ),
         color: AppColors.white,
       ),
     );
   }
+
   _playerButton() {
     return Padding(
       padding: EdgeInsets.only(left: 16.w, right: 16.w),
@@ -161,7 +178,8 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
               ),
               fit: BoxFit.fitWidth,
               color: AppColors.secondary_light[600],
-              style: AppTextStyles.bodyLargeBold.copyWith(color: AppColors.white),
+              style:
+                  AppTextStyles.bodyLargeBold.copyWith(color: AppColors.white),
             ),
           ),
         ],

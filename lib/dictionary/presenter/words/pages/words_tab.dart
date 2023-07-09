@@ -4,7 +4,7 @@ import 'package:words/dictionary/presenter/words/pages/word_item.dart';
 class WordsTab extends StatelessWidget {
    WordsTab( {required this.words,super.key});
 
-  List<String> words;
+  List<String?> words;
 
   @override
   Widget build(BuildContext context) {

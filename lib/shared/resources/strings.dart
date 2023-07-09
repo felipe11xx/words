@@ -6,6 +6,9 @@ class Strings {
   ///Sorry an Error has occurred :/
   static const genericError = 'Sorry an Error has occurred :/ ';
 
+  ///Try Again
+  static const tryAgain = 'Try Again';
+
   //commons
   ///Meanings
   static const meanings = 'Meanings';

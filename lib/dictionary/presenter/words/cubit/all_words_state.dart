@@ -18,7 +18,7 @@ class AllWordsStateLoadingState extends AllWordsState {
 }
 
 class AllWordsSuccessState extends AllWordsState {
-  final List<String> list;
+  final List<String?> list;
 
   AllWordsSuccessState(this.list);
 

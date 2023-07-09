@@ -9,18 +9,19 @@ class WordCompleted {
 
   WordCompleted(
       {this.word = '',
-      this.results,
+        List<Results>? results,
       this.syllables,
       this.pronunciation,
-      this.frequency});
+      this.frequency}): results = results ?? [];
 
   factory WordCompleted.fromJson(Map<String, dynamic> json) {
     return WordCompleted(
       word: json['word'],
-      results: (json['results'] as List)
+
+      results: json['results'] != null ?(json['results'] as List)
           .map((e) => Results.fromJson(e))
           .toList()
-          .cast(),
+          .cast() : [] ,
       syllables: json['syllables'] != null
           ? Syllables.fromJson(json['syllables'])
           : null,

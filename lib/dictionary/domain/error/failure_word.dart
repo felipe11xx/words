@@ -4,7 +4,8 @@ abstract class FailureWord implements Exception{}
 class CompletelyWordDataSourceError implements FailureWord {
 
   final String? message;
+  final bool is404;
 
-  CompletelyWordDataSourceError({this.message});
+  CompletelyWordDataSourceError({this.message, this.is404 = false});
 
 }

@@ -30,6 +30,7 @@ class DoGetCompletelyWordExternal implements IDoGetCompletelyWordDataSource {
       var error = ErrorBody.fromMap(e.response?.data);
       throw CompletelyWordDataSourceError(
         message: error.message,
+        is404: (e.response?.statusCode == 404)
       );
     } catch (e) {
       throw CompletelyWordDataSourceError(
