@@ -17,9 +17,9 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
 
-    Future.delayed(const Duration(milliseconds: 5000), () {
+    Future.delayed(const Duration(milliseconds: 2000), () {
 
-      Modular.to.pushNamed(Routes.dictionary);
+      Modular.to.pushReplacementNamed(Routes.dictionary);
     });
 
     super.initState();

@@ -12,8 +12,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../shared/widgets/app_progress_indicator.dart';
 
 class CompletelyWordPage extends StatefulWidget {
-  const CompletelyWordPage({super.key});
-
+  const CompletelyWordPage({super.key, required this.word});
+  final String word;
   @override
   State<CompletelyWordPage> createState() => _CompletelyWordPageState();
 }
@@ -26,7 +26,7 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
 
   @override
   void initState() {
-    context.read<CompletelyWordCubit>().getCompletelyWord('flavor');
+    context.read<CompletelyWordCubit>().getCompletelyWord(widget.word);
     super.initState();
   }
 

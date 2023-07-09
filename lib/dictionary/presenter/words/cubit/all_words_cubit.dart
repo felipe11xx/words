@@ -16,9 +16,13 @@ class AllWordsCubit extends Cubit<AllWordsState> {
   getWords()async{
     emit(AllWordsStateLoadingState(true));
 
+   try {
+     var result = await _realTimeDataBaseService.getWords();
 
-    var result = await _realTimeDataBaseService.getWords();
-
+     emit(AllWordsSuccessState(result));
+   } catch (e){
+     emit(AllWordsErrorState(e as Exception));
+   }
 
   }
 }

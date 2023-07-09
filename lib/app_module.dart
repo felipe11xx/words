@@ -1,5 +1,4 @@
-import 'package:words/shared/services/real_time_data_base_service.dart';
-
+import 'package:words/dictionary/presenter/words/cubit/all_words_cubit.dart';
 import 'shared/navigation/routes.dart';
 import 'shared/network/custom_dio.dart';
 import 'shared/services/tts_service.dart';
@@ -11,6 +10,7 @@ import 'dictionary/external/get_completely_word_external.dart';
 import 'dictionary/domain/usecase/do_get_completely_word.dart';
 import 'dictionary/data/repository/get_completely_word_impl.dart';
 import 'package:words/user_session/presenter/pages/splash_page.dart';
+import 'package:words/shared/services/real_time_data_base_service.dart';
 import 'dictionary/presenter/completely_word/page/completely_word_page.dart';
 import 'dictionary/presenter/completely_word/cubit/completely_word_cubit.dart';
 
@@ -29,6 +29,7 @@ class AppModule extends Module {
             DoGetCompletelyWordUseCase(iGetCompletelyWordRepository: i())),
         Bind.singleton((i) => GetCompletelyWordImpl(i())),
         $CompletelyWordCubit,
+        $AllWordsCubit,
       ];
 
   @override
@@ -36,19 +37,21 @@ class AppModule extends Module {
         ChildRoute(
           Routes.defaultRoute,
           transition: TransitionType.rightToLeftWithFade,
-          child: (_, __) => const SplashPage(),
+          child: (_, args) => const SplashPage(),
         ),
         ChildRoute(
           Routes.dictionary,
           transition: TransitionType.rightToLeftWithFade,
-          child: (_, __) => const DictionaryPage(),
+          child: (_, args) => BlocProvider.value(
+              value: Modular.get<AllWordsCubit>(),
+              child: const DictionaryPage()),
         ),
         ChildRoute(
           Routes.wordCompletely,
           transition: TransitionType.rightToLeftWithFade,
-          child: (_, __) => BlocProvider.value(
+          child: (_, args) => BlocProvider.value(
             value: Modular.get<CompletelyWordCubit>(),
-            child: const CompletelyWordPage(),
+            child: CompletelyWordPage(word: args.data,),
           ),
         )
       ];

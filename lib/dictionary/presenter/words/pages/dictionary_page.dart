@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:words/dictionary/presenter/words/cubit/all_words_cubit.dart';
+import 'package:words/dictionary/presenter/words/cubit/all_words_state.dart';
 import 'package:words/dictionary/presenter/words/pages/favorites_tab.dart';
 import 'package:words/dictionary/presenter/words/pages/historic_tab.dart';
 import 'package:words/dictionary/presenter/words/pages/words_tab.dart';
 import 'package:words/shared/theme/colors.dart';
 import 'package:words/shared/theme/typography.dart';
 import '../../../../shared/resources/strings.dart';
-import '../../../../shared/services/real_time_data_base_service.dart';
+import '../../../../shared/widgets/app_progress_indicator.dart';
 
 class DictionaryPage extends StatefulWidget {
   const DictionaryPage({super.key});
@@ -16,11 +20,9 @@ class DictionaryPage extends StatefulWidget {
 
 class _DictionaryPageState extends State<DictionaryPage> {
 
-  final RealTimeDataBaseService _realTimeDataBaseService =RealTimeDataBaseService() ;
-
   @override
   void initState() {
-    _realTimeDataBaseService.getWords();
+    context.read<AllWordsCubit>().getWords();
     super.initState();
   }
 
@@ -54,12 +56,30 @@ class _DictionaryPageState extends State<DictionaryPage> {
             ),
           ]),
         ),
-        body: const TabBarView(
-          children: [
-            WordsTab(),
-            HistoricTab(),
-            FavoritesTab(),
-          ],
+        body: BlocConsumer<AllWordsCubit, AllWordsState>(
+          listener: (context, state){},
+          builder: (context, state){
+            if (state is AllWordsStateLoadingState){
+              return Center(
+                child: AppProgressIndicator(
+                  color: AppColors.secondary_light,
+                  width: 100.w,
+                  height: 100.w,
+                ),
+              );
+            }
+            if(state is AllWordsSuccessState){
+              return TabBarView(
+                children: [
+                  WordsTab(words: state.list,),
+                  HistoricTab(),
+                  FavoritesTab(),
+                ],
+              );
+            }
+
+          return const SizedBox.shrink();
+          }
         ),
       ),
     );
