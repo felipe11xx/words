@@ -1,16 +1,12 @@
+import '../cubit/cubits.dart';
 import 'package:flutter/material.dart';
+import '../../../../shared/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../shared/widgets/widgets.dart';
+import '../../../../shared/resources/resources.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:words/dictionary/presenter/words/cubit/all_words_cubit.dart';
-import 'package:words/dictionary/presenter/words/cubit/all_words_state.dart';
-import 'package:words/dictionary/presenter/words/pages/favorites_tab.dart';
-import 'package:words/dictionary/presenter/words/pages/historic_tab.dart';
-import 'package:words/dictionary/presenter/words/pages/words_tab.dart';
-import 'package:words/shared/theme/colors.dart';
-import 'package:words/shared/theme/typography.dart';
-import 'package:words/shared/widgets/app_error_screen.dart';
-import '../../../../shared/resources/strings.dart';
-import '../../../../shared/widgets/app_progress_indicator.dart';
+
+import 'pages.dart';
 
 class DictionaryPage extends StatefulWidget {
   const DictionaryPage({super.key});

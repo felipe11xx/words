@@ -1,20 +1,15 @@
+import '../cubit/cubits.dart';
 import 'package:flutter/material.dart';
-import '../../../../shared/theme/colors.dart';
-import '../../../../shared/utils/delay_future.dart';
-import '../../data/model/sing_in_request.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../shared/utils/validator.dart';
-import '../../../../shared/theme/typography.dart';
-import '../../../../shared/navigation/routes.dart';
-import '../../../../shared/resources/strings.dart';
+import '../../../../../shared/theme/theme.dart';
+import '../../../../../shared/utils/utils.dart';
+import '../../../data/model/sing_in_request.dart';
+import '../../../../../shared/widgets/widgets.dart';
+import '../../../../../shared/navigation/routes.dart';
+import '../../../../../shared/resources/strings.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_modular/flutter_modular.dart'
     hide ModularWatchExtension;
-import '../../../../shared/widgets/app_input_text.dart';
-import '../../../../shared/widgets/app_square_button.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../shared/widgets/app_progress_indicator.dart';
-import 'package:words/user_session/auth/signin/cubit/sign_in_cubit.dart';
-import 'package:words/user_session/auth/signin/cubit/sign__in_state.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -34,6 +29,7 @@ class _SignInPageState extends State<SignInPage> {
   bool isValidPassword = false;
   bool isValidEmail = false;
   bool obscureText = true;
+  bool isEnable = false;
   Debounce debounce = Debounce(const Duration(milliseconds: 500));
 
   @override
@@ -92,6 +88,9 @@ class _SignInPageState extends State<SignInPage> {
                     setState(() {
                       isValidEmail =
                           _formKeyEmail.currentState?.isValid ?? false;
+                      isEnable = context
+                          .read<SignInCubit>()
+                          .isEnable(isValidPassword, isValidEmail);
                     });
                   });
                 }),
@@ -126,21 +125,24 @@ class _SignInPageState extends State<SignInPage> {
                     setState(() {
                       isValidPassword =
                           _formKeyPassword.currentState?.isValid ?? false;
+                      isEnable = context
+                          .read<SignInCubit>()
+                          .isEnable(isValidPassword, isValidEmail);
                     });
                   });
                 },
                 keyboardType: TextInputType.number,
                 focusNode: _focusPassword),
+
             SizedBox(
               height: 20.w,
             ),
+
             Row(
               children: [
                 Expanded(
                   child: AppSquareButton(
-                    isEnable: context
-                        .read<SignInCubit>()
-                        .isEnable(isValidPassword, isValidEmail),
+                    isEnable:  isEnable,
                     onTap: () {
                       context.read<SignInCubit>().doSignIn(
                           SignInRequest(_tPassword.text, _tEmail.text));

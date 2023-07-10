@@ -11,7 +11,7 @@ class AppSquareButton extends StatelessWidget {
     this.icon,
     this.style,
     this.color,
-    this.isEnable = false,
+    this.isEnable = true,
     required this.onTap,
     required this.textButton,
   }) : super(key: key);

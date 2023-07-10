@@ -44,7 +44,20 @@ class AuthService extends ChangeNotifier {
         }
         throw AuthException(e.message);
       }
+  }
 
+  signUp(SignInRequest signInRequest)async{
+      try {
+        await _auth.createUserWithEmailAndPassword(email: signInRequest.email, password: signInRequest.password);
+        _getUser();
+      }  on FirebaseAuthException catch(e){
+        if(e.code == 'waek-password'){
+          throw AuthException(Strings.weakPassword);
+        }else if(e.code == 'email-already-in-use'){
+          throw AuthException(Strings.emailIsAlreadyInUse);
+        }
+        throw AuthException(e.message);
+      }
   }
 
 }

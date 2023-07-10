@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import '../../../../shared/services/auth_service.dart';
+import '../../../../../shared/services/auth_service.dart';
 
 abstract class SignInState  extends Equatable{}
 

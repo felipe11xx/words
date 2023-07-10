@@ -43,7 +43,6 @@ class Strings {
   static const insertAPasswordAgain = 'Insert a Password again';
 
 
-
    ///Incorrect Password
   static const incorrectPassword = 'Incorrect Password';
 
@@ -58,6 +57,12 @@ class Strings {
 
   ///SIGN UP
   static const signUp = 'SIGN UP';
+
+  ///weak password
+  static const weakPassword = 'weak password';
+
+  ///email is already in use
+  static const emailIsAlreadyInUse = 'email is already in use';
 
   //commons
   ///Meanings

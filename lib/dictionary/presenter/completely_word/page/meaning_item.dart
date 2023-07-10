@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../../shared/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:words/shared/theme/colors.dart';
-import 'package:words/shared/theme/typography.dart';
-
 
 class MeaningItem extends StatelessWidget {
   const MeaningItem({required this.meaning,super.key});

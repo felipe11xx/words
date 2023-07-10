@@ -1,18 +1,13 @@
+import '../cubit/cubits.dart';
 import 'package:flutter/material.dart';
-import '../cubit/completely_word_state.dart';
-import '../cubit/completely_word_cubit.dart';
-import 'package:words/shared/theme/colors.dart';
+import '../../../../shared/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../shared/resources/strings.dart';
-import 'package:words/shared/theme/typography.dart';
-import 'package:words/shared/resources/svg_paths.dart';
-import 'package:words/dictionary/data/model/models.dart';
-import '../../../../shared/widgets/app_square_button.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:words/shared/widgets/app_error_screen.dart';
-import '../../../../shared/widgets/app_progress_indicator.dart';
+import '../../../../shared/widgets/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart'
     hide ModularWatchExtension;
+import '../../../../shared/resources/resources.dart';
+import 'package:words/dictionary/data/model/models.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:words/dictionary/presenter/completely_word/page/meaning_item.dart';
 
 class CompletelyWordPage extends StatefulWidget {

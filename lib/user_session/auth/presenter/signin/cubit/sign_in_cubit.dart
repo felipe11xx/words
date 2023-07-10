@@ -1,9 +1,8 @@
-
-import '../../data/model/sing_in_request.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../data/model/sing_in_request.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:words/shared/services/auth_service.dart';
-import 'package:words/user_session/auth/signin/cubit/sign__in_state.dart';
+import 'package:words/user_session/auth/presenter/signin/cubit/sign_in_state.dart';
 
 final $SignInCubit =  Bind.singleton((i) => SignInCubit(i()));
 
