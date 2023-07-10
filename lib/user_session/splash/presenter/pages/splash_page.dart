@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:words/shared/theme/colors.dart';
+import '../../../../shared/navigation/routes.dart';
+import '../../../../shared/resources/strings.dart';
 import 'package:words/shared/theme/typography.dart';
-import '../../../shared/navigation/routes.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../shared/resources/strings.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -17,9 +17,9 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
 
-    Future.delayed(const Duration(milliseconds: 2000), () {
+    Future.delayed(const Duration(milliseconds: 1500), () {
 
-      Modular.to.pushReplacementNamed(Routes.dictionary);
+      Modular.to.pushReplacementNamed(Routes.signIn);
     });
 
     super.initState();

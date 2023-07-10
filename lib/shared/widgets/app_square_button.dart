@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:words/shared/theme/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:words/shared/theme/typography.dart';
 
 class AppSquareButton extends StatelessWidget {
   AppSquareButton({
@@ -10,10 +11,9 @@ class AppSquareButton extends StatelessWidget {
     this.icon,
     this.style,
     this.color,
-    this.isDisabled = false,
+    this.isEnable = false,
     required this.onTap,
     required this.textButton,
-
   }) : super(key: key);
 
   ///ajusta o tipo do texto para perder tamanho caso nao caiba o widget na tela com `BoxFit.scaleDown`.
@@ -21,27 +21,26 @@ class AppSquareButton extends StatelessWidget {
   TextStyle? style;
   final BoxFit? fit;
   final Color? color;
-  final bool isDisabled;
+  final bool isEnable;
   final String textButton;
   final void Function()? onTap;
 
   EdgeInsets? _padding;
-  TextStyle? _style;
-
 
   @override
   Widget build(BuildContext context) {
-
     return ClipRRect(
       borderRadius: BorderRadius.circular(8.r),
       child: Material(
-        color: color ?? AppColors.neutral[100],
+        color:
+            isEnable ? color ?? AppColors.neutral[100] : AppColors.secondary_light[200],
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
         child: Ink(
           child: InkWell(
-            onTap: isDisabled == false ? onTap : null,
+            onTap: isEnable ? onTap : null,
             child: Padding(
-              padding: _padding ?? EdgeInsets.symmetric(vertical: 12.w, horizontal: 32.w),
+              padding: _padding ??
+                  EdgeInsets.symmetric(vertical: 12.w, horizontal: 32.w),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -54,7 +53,12 @@ class AppSquareButton extends StatelessWidget {
                         fit: fit ?? BoxFit.scaleDown,
                         child: Text(
                           textButton,
-                          style: style ?? _style,
+                          style:isEnable ? style ??
+                              AppTextStyles.labelMedium.copyWith(
+                                color: AppColors.neutral[700],
+                              ) :AppTextStyles.labelMedium.copyWith(
+                            color: AppColors.neutral[300],
+                          ) ,
                         ),
                       ),
                     ),

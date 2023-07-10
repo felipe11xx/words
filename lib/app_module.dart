@@ -1,16 +1,20 @@
+import 'package:words/user_session/auth/signin/cubit/sign_in_cubit.dart';
+import 'package:words/user_session/auth/signin/pages/sign_in_page.dart';
+
 import 'shared/navigation/routes.dart';
 import 'shared/network/custom_dio.dart';
 import 'shared/services/tts_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:words/shared/services/auth_service.dart';
 import 'dictionary/presenter/words/pages/dictionary_page.dart';
 import 'dictionary/external/get_completely_word_external.dart';
 import 'dictionary/domain/usecase/do_get_completely_word.dart';
 import 'dictionary/data/repository/get_completely_word_impl.dart';
 import 'package:words/dictionary/internal/save_completely_word.dart';
-import 'package:words/user_session/presenter/pages/splash_page.dart';
 import 'package:words/shared/services/real_time_data_base_service.dart';
 import 'dictionary/data/repository/get_completely_word_internal_impl.dart';
+import 'package:words/user_session/splash/presenter/pages/splash_page.dart';
 import 'package:words/dictionary/internal/get_completely_word_internal.dart';
 import 'package:words/dictionary/presenter/words/cubit/all_words_cubit.dart';
 import 'dictionary/presenter/completely_word/page/completely_word_page.dart';
@@ -25,6 +29,10 @@ class AppModule extends Module {
         Bind((i) => CustomDio()),
         Bind((i) => AppTTS()),
         Bind((i) => RealTimeDataBaseService()),
+        Bind((i) => AuthService()),
+
+        //auth
+        $SignInCubit,
 
         //get Completely Word
         Bind.singleton((i) => DoGetCompletelyWordInternal()),
@@ -45,11 +53,21 @@ class AppModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        ChildRoute(
+
+       ChildRoute(
           Routes.defaultRoute,
           transition: TransitionType.rightToLeftWithFade,
           child: (_, args) => const SplashPage(),
         ),
+        ChildRoute(
+          Routes.signIn,
+          transition: TransitionType.rightToLeftWithFade,
+          child: (_, args) => BlocProvider.value(
+              value: Modular.get<SignInCubit>(),
+              child: const SignInPage()),
+        ),
+
+
         ChildRoute(
           Routes.dictionary,
           transition: TransitionType.rightToLeftWithFade,

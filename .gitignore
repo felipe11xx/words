@@ -163,8 +163,9 @@ proguard/
 
 # Google Services (e.g. APIs or Firebase)
 # google-services.json
-
-# Android Patch
+**/android/app/google-services.json
+**/ios/GoogleService-Info.plist
+**/ios/firebase_app_id_file.json
 
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
@@ -302,3 +303,4 @@ assets/.DS_Store
 
 #API KEY FILE
 lib/shared/network/api_keys.dart
+
