@@ -22,9 +22,12 @@ class WordItem extends StatelessWidget {
         decoration:
             BoxDecoration(border: Border.all(color: AppColors.secondaryLight_40, width: 1.w)),
         child: Center(
-          child: Text(
-            word ?? '',
-            style: AppTextStyles.bodyLarge,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              word ?? '',
+              style: AppTextStyles.bodyLarge,
+            ),
           ),
         ),
       ),

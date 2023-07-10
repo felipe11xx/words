@@ -25,7 +25,6 @@ class _SignInPageState extends State<SignInPage> {
   final _formKeyEmail = GlobalKey<FormFieldState>();
   final _formKeyPassword = GlobalKey<FormFieldState>();
   final _focusPassword = FocusNode();
-  String onError = '';
   bool isValidPassword = false;
   bool isValidEmail = false;
   bool obscureText = true;
@@ -41,9 +40,7 @@ class _SignInPageState extends State<SignInPage> {
           Modular.to.pushReplacementNamed(Routes.dictionary);
         }
         if (state is SignInErrorState) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(state.exception.message ?? ''),
-          ));
+          showSnackBar(context,state.exception.message ?? '');
         }
       },
       builder: (context, state) {
@@ -56,12 +53,12 @@ class _SignInPageState extends State<SignInPage> {
             ),
           );
         }
-        return _body(state);
+        return _body();
       },
     ));
   }
 
-  _body(state) {
+  _body() {
     return Form(
       key: _formKey,
       child: Container(
@@ -157,10 +154,14 @@ class _SignInPageState extends State<SignInPage> {
               ],
             ),
 
-            Padding(padding: EdgeInsets.only(top:42.w, left: 16.w, right: 16.w),
-
-            child: InkWell(
-                child: Text(Strings.signUp, style: AppTextStyles.overline,)),)
+            InkWell(
+              onTap: (){
+                Modular.to.pushNamed(Routes.signUp);
+              },
+                child: Padding(
+                  padding: EdgeInsets.only(top:42.w, left: 16.w, right: 16.w),
+                  child: Text(Strings.signUp, style: AppTextStyles.overline.copyWith().copyWith(decoration: TextDecoration.underline,),),
+                ))
           ],
         ),
       ),

@@ -29,7 +29,6 @@ class AuthService extends ChangeNotifier {
   _getUser(){
     userAuth = _auth.currentUser;
     notifyListeners();
-
   }
 
   signIn(SignInRequest signInRequest)async{
@@ -56,6 +55,15 @@ class AuthService extends ChangeNotifier {
         }else if(e.code == 'email-already-in-use'){
           throw AuthException(Strings.emailIsAlreadyInUse);
         }
+        throw AuthException(e.message);
+      }
+  }
+
+  signOut()async{
+      try {
+        await _auth.signOut();
+        _getUser();
+      }  on FirebaseAuthException catch(e){
         throw AuthException(e.message);
       }
   }

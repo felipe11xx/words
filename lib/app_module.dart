@@ -16,7 +16,9 @@ import 'package:words/dictionary/internal/get_completely_word_internal.dart';
 import 'package:words/dictionary/presenter/words/cubit/all_words_cubit.dart';
 import 'dictionary/presenter/completely_word/page/completely_word_page.dart';
 import 'dictionary/presenter/completely_word/cubit/completely_word_cubit.dart';
+import 'package:words/user_session/auth/presenter/signup/pages/sign_up_page.dart';
 import 'package:words/user_session/auth/presenter/signin/pages/sign_in_page.dart';
+import 'package:words/user_session/auth/presenter/signup/cubit/sign_up_cubit.dart';
 import 'package:words/user_session/auth/presenter/signin/cubit/sign_in_cubit.dart';
 import 'package:words/dictionary/domain/usecase/do_save_completely_word_usecase.dart';
 import 'package:words/dictionary/data/repository/save_completeky_word_repository_impl.dart';
@@ -32,6 +34,7 @@ class AppModule extends Module {
 
         //auth
         $SignInCubit,
+        $SignUpCubit,
 
         //get Completely Word
         Bind.singleton((i) => DoGetCompletelyWordInternal()),
@@ -58,6 +61,7 @@ class AppModule extends Module {
           transition: TransitionType.rightToLeftWithFade,
           child: (_, args) => const SplashPage(),
         ),
+
         ChildRoute(
           Routes.signIn,
           transition: TransitionType.rightToLeftWithFade,
@@ -66,6 +70,13 @@ class AppModule extends Module {
               child: const SignInPage()),
         ),
 
+        ChildRoute(
+          Routes.signUp,
+          transition: TransitionType.rightToLeftWithFade,
+          child: (_, args) => BlocProvider.value(
+              value: Modular.get<SignUpCubit>(),
+              child: const SignUpPage()),
+        ),
 
         ChildRoute(
           Routes.dictionary,
@@ -74,6 +85,7 @@ class AppModule extends Module {
               value: Modular.get<AllWordsCubit>(),
               child: const DictionaryPage()),
         ),
+
         ChildRoute(
           Routes.wordCompletely,
           transition: TransitionType.rightToLeftWithFade,

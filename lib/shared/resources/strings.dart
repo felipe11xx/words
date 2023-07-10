@@ -33,6 +33,9 @@ class Strings {
   ///Password
   static const password = 'Password';
 
+  ///Confirm Password
+  static const confirmPassword = 'Confirm Password';
+
   ///Insert your Password
   static const insertYourPassword = 'Insert your Password';
 
@@ -63,6 +66,9 @@ class Strings {
 
   ///email is already in use
   static const emailIsAlreadyInUse = 'email is already in use';
+
+  ///Passwords don't match
+  static const passwordsDoNotMatch = 'Passwords don\'t match';
 
   //commons
   ///Meanings

@@ -22,7 +22,7 @@ class AppInputText extends StatelessWidget {
 
   AppInputText(this.label,
       this.hint,
-      {this.isPassword = false,
+      {super.key, this.isPassword = false,
         this.textEditingController,
         this.validator,
         this.keyboardType,
