@@ -11,7 +11,7 @@ class DoGetCompletelyWordInternal implements IDoGetCompletelyWordDataSource{
   Future<CompletelyWord> doGetCompletelyWord(String? word) async{
     try {
       final boxWordsCompletely = await Hive.openBox('completelyWord');
-      final completelyWord = boxWordsCompletely.get(word);
+      final completelyWord = await boxWordsCompletely.get(word);
       return CompletelyWord.fromJson(completelyWord);
     } catch (e) {
       throw CompletelyWordDataSourceError(message: e.toString(), );

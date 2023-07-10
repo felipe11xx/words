@@ -26,7 +26,8 @@ class CompletelyWord {
           ? Syllables.fromJson(json['syllables'])
           : null,
       pronunciation: json['pronunciation'] != null
-          ? Pronunciation.fromJson(json['pronunciation'])
+          ? (json['pronunciation'] is String )? Pronunciation(all: json['pronunciation']) : Pronunciation.fromJson(json['pronunciation'])
+      //some objects come from api as Sting
           : null,
       frequency: json['frequency'] ,
     );
