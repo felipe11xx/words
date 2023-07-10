@@ -1,21 +1,21 @@
 import 'models.dart';
 
-class WordCompleted {
+class CompletelyWord {
   String? word;
   List<Results>? results;
   Syllables? syllables;
   Pronunciation? pronunciation;
-  double? frequency;
+  num? frequency;
 
-  WordCompleted(
+  CompletelyWord(
       {this.word = '',
         List<Results>? results,
       this.syllables,
       this.pronunciation,
       this.frequency}): results = results ?? [];
 
-  factory WordCompleted.fromJson(Map<String, dynamic> json) {
-    return WordCompleted(
+  factory CompletelyWord.fromJson(Map<String, dynamic> json) {
+    return CompletelyWord(
       word: json['word'],
 
       results: json['results'] != null ?(json['results'] as List)
@@ -28,7 +28,7 @@ class WordCompleted {
       pronunciation: json['pronunciation'] != null
           ? Pronunciation.fromJson(json['pronunciation'])
           : null,
-      frequency: json['frequency'],
+      frequency: json['frequency'] ,
     );
   }
 

@@ -6,6 +6,10 @@ class Strings {
   ///Sorry an Error has occurred :/
   static const genericError = 'Sorry an Error has occurred :/ ';
 
+  //errors
+  ///Sorry an Error has occurred  when try to save a Word in hive :/
+  static const saveWordError = 'Sorry an Error has occurred  when try to save a Word in hive :/ ';
+
   ///Try Again
   static const tryAgain = 'Try Again';
 

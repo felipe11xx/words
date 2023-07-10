@@ -21,13 +21,13 @@ class CompleteWordLoadingState extends CompletelyWordState {
 }
 
 class CompleteWordSuccessState extends CompletelyWordState {
-  final WordCompleted wordCompleted;
+  final CompletelyWord completelyWord;
   final List<String?> meanings;
 
-  CompleteWordSuccessState(this.wordCompleted, this.meanings);
+  CompleteWordSuccessState(this.completelyWord, this.meanings);
 
   @override
-  List<Object?> get props => [wordCompleted, meanings];
+  List<Object?> get props => [completelyWord, meanings];
 }
 
 class CompleteWordErrorState extends CompletelyWordState {

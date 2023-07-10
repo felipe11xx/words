@@ -4,8 +4,8 @@ import '../domain/error/failure_word.dart';
 import '../../shared/resources/strings.dart';
 import '../../shared/network/custom_dio.dart';
 import 'package:words/shared/network/urls.dart';
-import 'package:words/dictionary/data/model/word_completed.dart';
-import 'package:words/dictionary/data/datasource/get_completely_word.dart';
+import 'package:words/dictionary/data/model/completely_word.dart';
+import 'package:words/dictionary/data/datasource/get_completely_word_datasource.dart';
 
 class DoGetCompletelyWordExternal implements IDoGetCompletelyWordDataSource {
   final CustomDio customDio;
@@ -13,14 +13,14 @@ class DoGetCompletelyWordExternal implements IDoGetCompletelyWordDataSource {
   DoGetCompletelyWordExternal(this.customDio);
 
   @override
-  Future<WordCompleted> doGetCompletelyWord(String? word) async {
+  Future<CompletelyWord> doGetCompletelyWord(String? word) async {
     try {
       final response = await customDio.get(
         '${Urls.wordsApiGet}$word',
       );
 
       if (response.statusCode == 200) {
-        return WordCompleted.fromJson(response.data);
+        return CompletelyWord.fromJson(response.data);
       } else {
         throw CompletelyWordDataSourceError(
           message: response.statusMessage,

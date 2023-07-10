@@ -25,7 +25,7 @@ class CompletelyWordPage extends StatefulWidget {
 }
 
 class _CompletelyWordPageState extends State<CompletelyWordPage> {
-  late WordCompleted wordCompleted;
+  late CompletelyWord completelyWord;
   late List<String?> meanings;
   bool isFavorite = false;
   final PageController _controller = PageController();
@@ -58,7 +58,7 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
     return BlocConsumer<CompletelyWordCubit, CompletelyWordState>(
         listener: (context, state) {
       if (state is CompleteWordSuccessState) {
-        wordCompleted = state.wordCompleted;
+        completelyWord = state.completelyWord;
         meanings = state.meanings;
       }
     }, builder: (context, state) {
@@ -126,14 +126,14 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
           Padding(
             padding: EdgeInsets.only(top: 16.w, bottom: 16.w),
             child: Text(
-              wordCompleted.word ?? '',
+              completelyWord.word ?? '',
               style: AppTextStyles.headH2,
             ),
           ),
           Padding(
             padding: EdgeInsets.only(top: 16.w, bottom: 32.w),
             child: Text(
-              wordCompleted.pronunciation?.all ?? '',
+              completelyWord.pronunciation?.all ?? '',
               style: TextStyle(fontSize: 54.sp),
             ),
           ),
@@ -170,7 +170,7 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
               onTap: () {
                 context
                     .read<CompletelyWordCubit>()
-                    .speak(wordCompleted.word ?? '');
+                    .speak(completelyWord.word ?? '');
               },
               textButton: Strings.listen,
               icon: Icon(
