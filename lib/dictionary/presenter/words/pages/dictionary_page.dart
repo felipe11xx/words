@@ -1,12 +1,13 @@
+import 'pages.dart';
 import '../cubit/cubits.dart';
 import 'package:flutter/material.dart';
 import '../../../../shared/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../shared/widgets/widgets.dart';
+import '../../../../shared/navigation/routes.dart';
 import '../../../../shared/resources/resources.dart';
+import 'package:flutter_modular/flutter_modular.dart' hide ModularWatchExtension;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'pages.dart';
 
 class DictionaryPage extends StatefulWidget {
   const DictionaryPage({super.key});
@@ -27,6 +28,33 @@ class _DictionaryPageState extends State<DictionaryPage> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        drawer: Drawer(
+          backgroundColor: AppColors.secondary_light[200],
+          child: ListView(
+            children: [
+              ListTile(
+                leading: const Icon(
+                  Icons.email_outlined,
+                ),
+                title: Text(
+                  context.read<AllWordsCubit>().getUserEmail() ?? '',
+                  style: AppTextStyles.labelSmall,
+                ),
+              ),
+              ListTile(
+                leading: const Icon(Icons.exit_to_app),
+                title: Text(
+                  Strings.signOut,
+                  style: AppTextStyles.labelSmall,
+                ),
+                trailing: const Icon(Icons.arrow_forward),
+                onTap: () {
+                  context.read<AllWordsCubit>().signOut();
+                },
+              ),
+            ],
+          ),
+        ),
         appBar: AppBar(
           title: Text(
             Strings.dictionary,
@@ -55,7 +83,15 @@ class _DictionaryPageState extends State<DictionaryPage> {
           ]),
         ),
         body: BlocConsumer<AllWordsCubit, AllWordsState>(
-            listener: (context, state) {},
+            listener: (context, state) {
+
+              if(state is UserSignOutErrorState){
+                showSnackBar(context,state.exception.message);
+              }
+              if(state is UserSignOutSuccessState){
+                Modular.to.pushReplacementNamed(Routes.signIn);
+              }
+            },
             builder: (context, state) {
               if (state is AllWordsStateLoadingState) {
                 return Center(
@@ -81,8 +117,8 @@ class _DictionaryPageState extends State<DictionaryPage> {
                 return AppErrorScreen(
                     error: state.exception.toString(),
                     onPressed: () {
-                  context.read<AllWordsCubit>().getWords();
-                });
+                      context.read<AllWordsCubit>().getWords();
+                    });
               }
 
               return AppErrorScreen(onPressed: () {

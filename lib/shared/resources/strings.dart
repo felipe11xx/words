@@ -61,6 +61,9 @@ class Strings {
   ///SIGN UP
   static const signUp = 'SIGN UP';
 
+  ///SIGN OUT
+  static const signOut = 'SIGN OUT';
+
   ///weak password
   static const weakPassword = 'weak password';
 

@@ -23,6 +23,8 @@ import 'package:words/user_session/auth/presenter/signin/cubit/sign_in_cubit.dar
 import 'package:words/dictionary/domain/usecase/do_save_completely_word_usecase.dart';
 import 'package:words/dictionary/data/repository/save_completeky_word_repository_impl.dart';
 
+import 'user_session/splash/cubit/cubits.dart';
+
 class AppModule extends Module {
   @override
   List<Bind<Object>> get binds => [
@@ -35,6 +37,7 @@ class AppModule extends Module {
         //auth
         $SignInCubit,
         $SignUpCubit,
+        $SplashCubit,
 
         //get Completely Word
         Bind.singleton((i) => DoGetCompletelyWordInternal()),
@@ -59,7 +62,9 @@ class AppModule extends Module {
        ChildRoute(
           Routes.defaultRoute,
           transition: TransitionType.rightToLeftWithFade,
-          child: (_, args) => const SplashPage(),
+          child: (_, args) => BlocProvider.value(
+              value: Modular.get<SplashCubit>(),
+              child: const SplashPage()),
         ),
 
         ChildRoute(
