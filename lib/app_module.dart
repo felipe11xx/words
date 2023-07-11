@@ -65,7 +65,8 @@ class AppModule extends Module {
         Bind.singleton((i) => DoGetUserHistoryUseCase(i())),
         Bind.singleton((i) => GetUserHistoryInternalImpl(i())),
         Bind.singleton((i) => DoGetUserHistoryInternalDatasource()),
-
+        $HomeCubit,
+        $HistoryCubit,
         $AllWordsCubit,
       ];
 
@@ -93,8 +94,7 @@ class AppModule extends Module {
           Routes.dictionary,
           transition: TransitionType.rightToLeftWithFade,
           child: (_, args) => BlocProvider.value(
-              value: Modular.get<AllWordsCubit>(),
-              child: const DictionaryPage()),
+              value: Modular.get<HomeCubit>(), child: const HomePage()),
         ),
         ChildRoute(
           Routes.wordCompletely,
