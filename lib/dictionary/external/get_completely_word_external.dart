@@ -7,10 +7,10 @@ import 'package:words/shared/network/urls.dart';
 import 'package:words/dictionary/data/model/completely_word.dart';
 import 'package:words/dictionary/data/datasource/get_completely_word_datasource.dart';
 
-class DoGetCompletelyWordExternal implements IDoGetCompletelyWordDataSource {
+class DoGetCompletelyWordExternalDatasource implements IDoGetCompletelyWordDataSource {
   final CustomDio customDio;
 
-  DoGetCompletelyWordExternal(this.customDio);
+  DoGetCompletelyWordExternalDatasource(this.customDio);
 
   @override
   Future<CompletelyWord> doGetCompletelyWord(String? word) async {

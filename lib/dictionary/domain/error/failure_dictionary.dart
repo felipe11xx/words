@@ -1,6 +1,5 @@
 abstract class FailureDictionary implements Exception{}
 
-
 class CompletelyWordDataSourceError implements FailureDictionary {
 
   final String? message;

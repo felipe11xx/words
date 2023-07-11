@@ -4,8 +4,8 @@ import '../domain/error/failure_dictionary.dart';
 import 'package:words/dictionary/data/model/completely_word.dart';
 import 'package:words/dictionary/data/datasource/get_completely_word_datasource.dart';
 
-class DoGetCompletelyWordInternal implements IDoGetCompletelyWordDataSource{
-  DoGetCompletelyWordInternal();
+class DoGetCompletelyWordInternalDatasource implements IDoGetCompletelyWordDataSource{
+  DoGetCompletelyWordInternalDatasource();
 
 
   @override

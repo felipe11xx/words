@@ -11,7 +11,7 @@ class SaveCompletelyWordImpl implements ISaveCompletelyWordRepository {
   SaveCompletelyWordImpl(this.dataSource);
 
   @override
-  Future<Either<FailureWord, bool>> saveCompletelyWord(
+  Future<Either<FailureDictionary, bool>> saveCompletelyWord(
       CompletelyWord completelyWord) async {
     try {
       final result = await dataSource.saveCompletelyWord(completelyWord);

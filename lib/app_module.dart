@@ -2,16 +2,22 @@ import 'shared/navigation/routes.dart';
 import 'shared/network/custom_dio.dart';
 import 'shared/services/tts_service.dart';
 import 'all_words/presenter/pages/pages.dart';
+import 'user_session/splash/cubit/cubits.dart';
 import 'all_words/presenter/cubit/cubits.dart';
 import 'dictionary/presenter/cubit/cubits.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:words/shared/services/auth_service.dart';
 import 'dictionary/presenter/page/completely_word_page.dart';
+import 'all_words/internal/get_user_repository_internal.dart';
 import 'dictionary/external/get_completely_word_external.dart';
 import 'dictionary/domain/usecase/do_get_completely_word.dart';
+import 'all_words/domain/usecase/do_get_user_history_usecase.dart';
+import 'all_words/domain/usecase/do_save_user_history_usecase.dart';
 import 'package:words/dictionary/internal/save_completely_word.dart';
 import 'package:words/shared/services/real_time_data_base_service.dart';
+import 'all_words/data/repository/get_user_history_repository_impl.dart';
+import 'package:words/all_words/internal/save_user_history_internal.dart';
 import 'dictionary/data/repository/get_completely_word_internal_impl.dart';
 import 'dictionary/data/repository/get_completely_word_external_impl.dart';
 import 'package:words/user_session/splash/presenter/pages/splash_page.dart';
@@ -21,9 +27,8 @@ import 'package:words/user_session/auth/presenter/signin/pages/sign_in_page.dart
 import 'package:words/user_session/auth/presenter/signup/cubit/sign_up_cubit.dart';
 import 'package:words/user_session/auth/presenter/signin/cubit/sign_in_cubit.dart';
 import 'package:words/dictionary/domain/usecase/do_save_completely_word_usecase.dart';
+import 'package:words/all_words/data/repository/save_user_history_repository_impl.dart';
 import 'package:words/dictionary/data/repository/save_completely_word_repository_impl.dart';
-
-import 'user_session/splash/cubit/cubits.dart';
 
 class AppModule extends Module {
   @override
@@ -40,49 +45,50 @@ class AppModule extends Module {
         $SplashCubit,
 
         //get Completely Word
-        Bind.singleton((i) => DoGetCompletelyWordInternal()),
-        Bind.singleton((i) => GetCompletelyWordInternalImpl(i<DoGetCompletelyWordInternal>())),
-        Bind.singleton((i) => DoGetCompletelyWordExternal(i())),
-        Bind.singleton((i) => GetCompletelyWordExternalImpl(i<DoGetCompletelyWordExternal>())),
-        Bind.singleton((i) =>
-            DoGetCompletelyWordUseCase( i(),i())),
-
-
-        Bind.singleton((i) => SaveCountriesDatasourceInternal()),
+        Bind.singleton((i) => DoGetCompletelyWordInternalDatasource()),
+        Bind.singleton((i) => GetCompletelyWordInternalImpl(
+            i<DoGetCompletelyWordInternalDatasource>())),
+        Bind.singleton((i) => DoGetCompletelyWordExternalDatasource(i())),
+        Bind.singleton((i) => GetCompletelyWordExternalImpl(
+            i<DoGetCompletelyWordExternalDatasource>())),
+        Bind.singleton((i) => DoGetCompletelyWordUseCase(i(), i())),
+        Bind.singleton((i) => SaveCountriesInternalDatasource()),
         Bind.singleton((i) => DoSaveCompletelyWordUseCase(i())),
         Bind.singleton((i) => SaveCompletelyWordImpl(i())),
-
         $CompletelyWordCubit,
+
+        //all words
+        Bind.singleton((i) => DoSaveUserHistoryUseCase(i())),
+        Bind.singleton((i) => SaveUserHistoryInternalImpl(i())),
+        Bind.singleton((i) => DoSaveUserHistoryInternalDatasource()),
+
+        Bind.singleton((i) => DoGetUserHistoryUseCase(i())),
+        Bind.singleton((i) => GetUserHistoryInternalImpl(i())),
+        Bind.singleton((i) => DoGetUserHistoryInternalDatasource()),
+
         $AllWordsCubit,
       ];
 
   @override
   List<ModularRoute> get routes => [
-
-       ChildRoute(
+        ChildRoute(
           Routes.defaultRoute,
           transition: TransitionType.rightToLeftWithFade,
           child: (_, args) => BlocProvider.value(
-              value: Modular.get<SplashCubit>(),
-              child: const SplashPage()),
+              value: Modular.get<SplashCubit>(), child: const SplashPage()),
         ),
-
         ChildRoute(
           Routes.signIn,
           transition: TransitionType.rightToLeftWithFade,
           child: (_, args) => BlocProvider.value(
-              value: Modular.get<SignInCubit>(),
-              child: const SignInPage()),
+              value: Modular.get<SignInCubit>(), child: const SignInPage()),
         ),
-
         ChildRoute(
           Routes.signUp,
           transition: TransitionType.rightToLeftWithFade,
           child: (_, args) => BlocProvider.value(
-              value: Modular.get<SignUpCubit>(),
-              child: const SignUpPage()),
+              value: Modular.get<SignUpCubit>(), child: const SignUpPage()),
         ),
-
         ChildRoute(
           Routes.dictionary,
           transition: TransitionType.rightToLeftWithFade,
@@ -90,7 +96,6 @@ class AppModule extends Module {
               value: Modular.get<AllWordsCubit>(),
               child: const DictionaryPage()),
         ),
-
         ChildRoute(
           Routes.wordCompletely,
           transition: TransitionType.rightToLeftWithFade,

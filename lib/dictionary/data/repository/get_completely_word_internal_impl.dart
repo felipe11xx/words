@@ -12,7 +12,7 @@ class GetCompletelyWordInternalImpl implements IGetCompletelyWordInternalReposit
   GetCompletelyWordInternalImpl(this.dataSource);
 
   @override
-  Future<Either<FailureWord, CompletelyWord>> getCompletelyWordInternal(String? word) async {
+  Future<Either<FailureDictionary, CompletelyWord>> getCompletelyWordInternal(String? word) async {
     try{
       final result = await dataSource.doGetCompletelyWord(word);
       return Right(result);

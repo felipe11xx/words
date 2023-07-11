@@ -11,7 +11,7 @@ class GetCompletelyWordExternalImpl implements IGetCompletelyWordRepository {
   GetCompletelyWordExternalImpl(this.dataSource);
 
   @override
-  Future<Either<FailureWord, CompletelyWord>> getCompletelyWord(String? word) async {
+  Future<Either<FailureDictionary, CompletelyWord>> getCompletelyWord(String? word) async {
     try{
       final result = await dataSource.doGetCompletelyWord(word);
       return Right(result);
