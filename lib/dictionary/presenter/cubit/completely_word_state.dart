@@ -1,7 +1,9 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../data/model/models.dart';
-import '../../../domain/error/failure_word.dart';
+import '../../data/model/models.dart';
+import '../../domain/error/failure_word.dart';
+
+
 
 abstract class CompletelyWordState extends Equatable{}
 

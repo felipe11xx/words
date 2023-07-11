@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:words/dictionary/presenter/words/pages/word_item.dart';
+import 'package:words/all_words/presenter/pages/pages.dart';
 
 class WordsTab extends StatelessWidget {
    WordsTab( {required this.words,super.key});

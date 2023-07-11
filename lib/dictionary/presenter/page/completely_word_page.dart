@@ -8,7 +8,8 @@ import 'package:flutter_modular/flutter_modular.dart'
 import '../../../../shared/resources/resources.dart';
 import 'package:words/dictionary/data/model/models.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:words/dictionary/presenter/completely_word/page/meaning_item.dart';
+
+import 'meaning_item.dart';
 
 class CompletelyWordPage extends StatefulWidget {
   const CompletelyWordPage({super.key, required this.word});
