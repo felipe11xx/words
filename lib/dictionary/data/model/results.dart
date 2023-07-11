@@ -21,7 +21,7 @@ class Results {
         derivation = derivation ?? [],
         examples = examples ?? [];
 
-  factory Results.fromJson(Map<String, dynamic> json) {
+  factory Results.fromJson(Map<dynamic, dynamic> json) {
     return Results(
       definition: json['definition'],
       partOfSpeech: json['partOfSpeech'],
@@ -43,8 +43,8 @@ class Results {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+  Map<dynamic, dynamic> toJson() {
+    final Map<dynamic, dynamic> data = <dynamic, dynamic>{};
     data['definition'] = definition;
     data['partOfSpeech'] = partOfSpeech;
     data['synonyms'] = synonyms;

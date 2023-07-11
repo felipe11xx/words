@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
 import '../domain/error/failure_word.dart';
 import 'package:words/dictionary/data/model/completely_word.dart';
@@ -14,6 +15,7 @@ class DoGetCompletelyWordInternal implements IDoGetCompletelyWordDataSource{
       final completelyWord = await boxWordsCompletely.get(word);
       return CompletelyWord.fromJson(completelyWord);
     } catch (e) {
+      debugPrint('err' + e.toString());
       throw CompletelyWordDataSourceError(message: e.toString(), );
     }
   }

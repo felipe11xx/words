@@ -14,7 +14,7 @@ class CompletelyWord {
       this.pronunciation,
       this.frequency}): results = results ?? [];
 
-  factory CompletelyWord.fromJson(Map<String, dynamic> json) {
+  factory CompletelyWord.fromJson(Map<dynamic, dynamic> json) {
     return CompletelyWord(
       word: json['word'],
 
@@ -33,8 +33,8 @@ class CompletelyWord {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+  Map<dynamic, dynamic> toJson() {
+    final Map<dynamic, dynamic> data = <dynamic, dynamic>{};
     data['word'] = word;
     if (results != null) {
       data['results'] = results!.map((v) => v.toJson()).toList();

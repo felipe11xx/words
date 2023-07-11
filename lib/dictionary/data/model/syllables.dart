@@ -7,15 +7,15 @@ class Syllables {
     List<String>?   list,
   }):list = list ?? [];
 
-  factory Syllables.fromJson(Map<String, dynamic> json) {
+  factory Syllables.fromJson(Map<dynamic, dynamic> json) {
     return Syllables(
       count: json['count'],
       list: json['list'] == null ? []: List<String>.from(json["list"].map((x) => x)),
     );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+  Map<dynamic, dynamic> toJson() {
+    final Map<dynamic, dynamic> data = <dynamic, dynamic>{};
     data['count'] = count;
     data['list'] = list;
     return data;
