@@ -1,7 +1,7 @@
-abstract class FailureWord implements Exception{}
+abstract class FailureDictionary implements Exception{}
 
 
-class CompletelyWordDataSourceError implements FailureWord {
+class CompletelyWordDataSourceError implements FailureDictionary {
 
   final String? message;
   final bool is404;
@@ -10,7 +10,7 @@ class CompletelyWordDataSourceError implements FailureWord {
 
 }
 
-class SaveCompletelyWordDataSourceError implements FailureWord {
+class SaveCompletelyWordDataSourceError implements FailureDictionary {
   final String? message;
 
   SaveCompletelyWordDataSourceError({

@@ -21,7 +21,7 @@ import 'package:words/user_session/auth/presenter/signin/pages/sign_in_page.dart
 import 'package:words/user_session/auth/presenter/signup/cubit/sign_up_cubit.dart';
 import 'package:words/user_session/auth/presenter/signin/cubit/sign_in_cubit.dart';
 import 'package:words/dictionary/domain/usecase/do_save_completely_word_usecase.dart';
-import 'package:words/dictionary/data/repository/save_completeky_word_repository_impl.dart';
+import 'package:words/dictionary/data/repository/save_completely_word_repository_impl.dart';
 
 import 'user_session/splash/cubit/cubits.dart';
 

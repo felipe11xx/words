@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import '../../../shared/resources/strings.dart';
 import '../datasource/save_completely_word_datasource.dart';
 import 'package:words/dictionary/data/model/completely_word.dart';
-import 'package:words/dictionary/domain/error/failure_word.dart';
+import 'package:words/dictionary/domain/error/failure_dictionary.dart';
 import 'package:words/dictionary/domain/repositories/save_completely_word_repository.dart';
 
 class SaveCompletelyWordImpl implements ISaveCompletelyWordRepository {

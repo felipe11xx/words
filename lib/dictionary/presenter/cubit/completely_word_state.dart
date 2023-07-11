@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 import '../../data/model/models.dart';
-import '../../domain/error/failure_word.dart';
+import '../../domain/error/failure_dictionary.dart';
 
 
 

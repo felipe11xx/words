@@ -1,4 +1,4 @@
-import '../../domain/error/failure_word.dart';
+import '../../domain/error/failure_dictionary.dart';
 import 'completely_word_state.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';

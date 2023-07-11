@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-class HistoricTab extends StatelessWidget {
-  const HistoricTab({super.key});
+class HistoryTab extends StatelessWidget {
+  const HistoryTab({super.key});
 
   @override
   Widget build(BuildContext context) {

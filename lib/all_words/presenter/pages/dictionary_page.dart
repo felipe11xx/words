@@ -108,7 +108,7 @@ class _DictionaryPageState extends State<DictionaryPage> {
                     WordsTab(
                       words: state.list,
                     ),
-                    HistoricTab(),
+                    HistoryTab(),
                     FavoritesTab(),
                   ],
                 );

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '../../../shared/resources/strings.dart';
-import 'package:words/dictionary/domain/error/failure_word.dart';
+import 'package:words/dictionary/domain/error/failure_dictionary.dart';
 import 'package:words/dictionary/data/model/completely_word.dart';
 import 'package:words/dictionary/domain/repositories/get_completely_word_internal_repository.dart';
 
