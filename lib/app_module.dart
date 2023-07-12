@@ -9,15 +9,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:words/shared/services/auth_service.dart';
 import 'dictionary/presenter/page/completely_word_page.dart';
-import 'all_words/internal/get_user_repository_internal.dart';
+import 'user_history/internal/get_user_datasource_internal.dart';
 import 'dictionary/external/get_completely_word_external.dart';
 import 'dictionary/domain/usecase/do_get_completely_word.dart';
-import 'all_words/domain/usecase/do_get_user_history_usecase.dart';
-import 'all_words/domain/usecase/do_save_user_history_usecase.dart';
+import 'user_history/domain/usecase/do_get_user_history_usecase.dart';
+import 'user_history/domain/usecase/do_save_user_history_usecase.dart';
 import 'package:words/dictionary/internal/save_completely_word.dart';
 import 'package:words/shared/services/real_time_data_base_service.dart';
-import 'all_words/data/repository/get_user_history_repository_impl.dart';
-import 'package:words/all_words/internal/save_user_history_internal.dart';
+import 'user_history/data/repository/get_user_history_repository_impl.dart';
+import 'package:words/user_history/internal/save_user_history_datasource_internal.dart';
 import 'dictionary/data/repository/get_completely_word_internal_impl.dart';
 import 'dictionary/data/repository/get_completely_word_external_impl.dart';
 import 'package:words/user_session/splash/presenter/pages/splash_page.dart';
@@ -27,7 +27,7 @@ import 'package:words/user_session/auth/presenter/signin/pages/sign_in_page.dart
 import 'package:words/user_session/auth/presenter/signup/cubit/sign_up_cubit.dart';
 import 'package:words/user_session/auth/presenter/signin/cubit/sign_in_cubit.dart';
 import 'package:words/dictionary/domain/usecase/do_save_completely_word_usecase.dart';
-import 'package:words/all_words/data/repository/save_user_history_repository_impl.dart';
+import 'package:words/user_history/data/repository/save_user_history_repository_impl.dart';
 import 'package:words/dictionary/data/repository/save_completely_word_repository_impl.dart';
 
 class AppModule extends Module {
@@ -60,11 +60,11 @@ class AppModule extends Module {
         //all words
         Bind.singleton((i) => DoSaveUserHistoryUseCase(i())),
         Bind.singleton((i) => SaveUserHistoryInternalImpl(i())),
-        Bind.singleton((i) => DoSaveUserHistoryInternalDatasource()),
+        Bind.singleton((i) => DoSaveUserHistoryDatasourceInternal()),
 
         Bind.singleton((i) => DoGetUserHistoryUseCase(i())),
         Bind.singleton((i) => GetUserHistoryInternalImpl(i())),
-        Bind.singleton((i) => DoGetUserHistoryInternalDatasource()),
+        Bind.singleton((i) => DoGetUserHistoryDatasourceInternal()),
         $HomeCubit,
         $HistoryCubit,
         $AllWordsCubit,
