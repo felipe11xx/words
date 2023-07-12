@@ -1,3 +1,4 @@
+import 'meaning_item.dart';
 import '../cubit/cubits.dart';
 import 'package:flutter/material.dart';
 import '../../../../shared/theme/theme.dart';
@@ -8,8 +9,6 @@ import 'package:flutter_modular/flutter_modular.dart'
 import '../../../../shared/resources/resources.dart';
 import 'package:words/dictionary/data/model/models.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'meaning_item.dart';
 
 class CompletelyWordPage extends StatefulWidget {
   const CompletelyWordPage({super.key, required this.word});
@@ -56,6 +55,7 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
       if (state is CompleteWordSuccessState) {
         completelyWord = state.completelyWord;
         meanings = state.meanings;
+        isFavorite = state.isFavorite;
       }
     }, builder: (context, state) {
       if (state is CompleteWordLoadingState) {
@@ -145,6 +145,7 @@ class _CompletelyWordPageState extends State<CompletelyWordPage> {
         onPressed: () {
           setState(() {
             isFavorite = !isFavorite;
+            context.read<CompletelyWordCubit>().setFavorites(completelyWord.word);
           });
         },
         icon: Icon(

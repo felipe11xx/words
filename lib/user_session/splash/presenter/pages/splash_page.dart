@@ -30,7 +30,7 @@ class _SplashPageState extends State<SplashPage> {
             listener: (context, state) {
 
               if(state is SplashUserSessionSuccessState){
-                  Modular.to.pushReplacementNamed(Routes.dictionary);
+                  Modular.to.pushReplacementNamed(Routes.home);
               }
 
               if(state is SplashUserSessionErrorState){

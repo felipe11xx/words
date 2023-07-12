@@ -90,7 +90,6 @@ class _HomePageState extends State<HomePage> {
               showSnackBar(context, state.exception.message);
             }
             if (state is UserSignOutSuccessState) {
-
               Modular.to.pushReplacementNamed(Routes.signIn,);
             }
           },

@@ -22,12 +22,11 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     result.fold((l) =>
         emit(FavoritesErrorState(l as UserFavoritesDataSourceError)),
             (r) {
-          if(r == null){
+          if(r == null || r.wordsFavorites.isEmpty){
             emit(FavoritesEmptyState(true));
           }else{
             emit(FavoritesSuccessState(r.wordsFavorites ));
           }
-
         }
     );
   }

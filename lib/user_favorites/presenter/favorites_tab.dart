@@ -7,7 +7,8 @@ import '../../home/presenter/pages/pages.dart';
 import '../../shared/resources/resources.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_modular/flutter_modular.dart' hide ModularWatchExtension;
+import 'package:flutter_modular/flutter_modular.dart'
+    hide ModularWatchExtension;
 
 class FavoritesTab extends StatefulWidget {
   const FavoritesTab({super.key});
@@ -38,23 +39,31 @@ class _FavoritesTabState extends State<FavoritesTab> {
           );
         }
 
-        if(state is FavoritesEmptyState){
-          return   Center(
-            child: Text(Strings.noFavoritesYet, style: AppTextStyles.headH2,),
+        if (state is FavoritesEmptyState) {
+          return Center(
+            child: Text(
+              Strings.noFavoritesYet,
+              style: AppTextStyles.headH2,
+            ),
           );
-
         }
 
-        if(state is FavoritesSuccessState){
+        if (state is FavoritesSuccessState) {
           return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
               ),
               itemCount: state.list.length,
               itemBuilder: (BuildContext context, int index) {
-                return WordItem(word: state.list[index],onClickItem: (){ Modular.to.pushNamed(Routes.wordCompletely,arguments: state.list[index]);},);
-              }
-          );
+                return WordItem(
+                  word: state.list[index],
+                  onClickItem: () {
+                    Modular.to.pushNamed(Routes.wordCompletely,
+                        arguments: state.list[index]).then((value) => setState(() {    context.read<FavoritesCubit>().getWords();
+                    }));
+                  },
+                );
+              });
         }
 
         if (state is FavoritesErrorState) {
@@ -67,8 +76,7 @@ class _FavoritesTabState extends State<FavoritesTab> {
 
         return AppErrorScreen(onPressed: () {
           context.read<FavoritesCubit>().getWords();
-        }
-        );
+        });
       },
     );
   }

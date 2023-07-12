@@ -2,7 +2,7 @@ class Routes {
 
   static const defaultRoute = "/";
 
-  static const dictionary = "/dictionary";
+  static const home = "/home";
 
   static const wordCompletely = "/wordCompletely";
 

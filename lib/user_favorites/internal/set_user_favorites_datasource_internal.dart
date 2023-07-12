@@ -20,6 +20,10 @@ class DoSetUserFavoritesDatasourceInternal implements IDoSetUserFavoritesDatasou
           ];
           userFavoritesBox.put(
               userId, UserFavorites(userId: userId, wordsFavorites: upUserFavorites));
+        }else{
+          userFavorites.wordsFavorites.remove(word);
+          userFavoritesBox.put(
+              userId, UserFavorites(userId: userId, wordsFavorites: userFavorites.wordsFavorites));
         }
       } else {
         userFavoritesBox.put(userId,

@@ -37,7 +37,7 @@ class _SignInPageState extends State<SignInPage> {
         body: BlocConsumer<SignInCubit, SignInState>(
       listener: (context, state) {
         if (state is SignInSuccessState) {
-          Modular.to.pushReplacementNamed(Routes.dictionary);
+          Modular.to.pushReplacementNamed(Routes.home);
         }
         if (state is SignInErrorState) {
           showSnackBar(context,state.exception.message ?? '');
