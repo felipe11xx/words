@@ -1,5 +1,3 @@
-import 'package:words/user_favorites/presenter/cubit/cubits.dart';
-
 import 'pages.dart';
 import '../cubit/cubits.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../shared/resources/resources.dart';
 import 'package:flutter_modular/flutter_modular.dart'
     hide ModularWatchExtension;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:words/user_favorites/presenter/cubit/cubits.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -90,24 +90,39 @@ class _HomePageState extends State<HomePage> {
               showSnackBar(context, state.exception.message);
             }
             if (state is UserSignOutSuccessState) {
-              Modular.to.pushReplacementNamed(Routes.signIn,);
+              Modular.to.pushReplacementNamed(Routes.signIn);
             }
           },
           builder: (context, state) {
-            return TabBarView(
-              children: [
-                BlocProvider.value(
-                  value: Modular.get<AllWordsCubit>(),
-                  child: const AllWordsTab(),
+
+            if(state is HomeLoadingState){
+              return Center(
+                child: AppProgressIndicator(
+                  color: AppColors.secondary_light,
+                  width: 100.w,
+                  height: 100.w,
                 ),
-                BlocProvider.value(
-                    value: Modular.get<HistoryCubit>(),
-                    child: const HistoryTab()),
-                BlocProvider.value(
-                    value: Modular.get<FavoritesCubit>(),
-                    child: const FavoritesTab()),
-              ],
-            );
+              );
+            }
+            if(state is HomeInitialState){
+              return TabBarView(
+                children: [
+                  BlocProvider.value(
+                    value: Modular.get<AllWordsCubit>(),
+                    child: const AllWordsTab(),
+                  ),
+                  BlocProvider.value(
+                      value: Modular.get<HistoryCubit>(),
+                      child: const HistoryTab()),
+                  BlocProvider.value(
+                      value: Modular.get<FavoritesCubit>(),
+                      child: const FavoritesTab()),
+                ],
+              );
+            }
+
+            return AppErrorScreen( onPressed: (){Modular.to.pushReplacementNamed(Routes.signIn,);});
+
           },
         ),
       ),

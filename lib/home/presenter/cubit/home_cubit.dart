@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../shared/services/auth_service.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -10,8 +11,11 @@ class HomeCubit extends Cubit<HomeState> {
 
   signOut() async {
     try {
+      emit(HomeLoadingState());
+      debugPrint("HomeLoadingState");
       await _authServices.signOut();
       emit(UserSignOutSuccessState());
+      debugPrint("UserSignOutSuccessState");
       emit(HomeInitialState());
 
     } on AuthException catch (e) {

@@ -38,7 +38,7 @@ class _SignUpPageState extends State<SignUpPage> {
       body: BlocConsumer<SignUpCubit, SignUpState>(
         listener: (context, state) {
           if (state is SignUpSuccessState) {
-            Modular.to.pushReplacementNamed(Routes.home);
+            Modular.to.pushNamedAndRemoveUntil(Routes.home, (route) => false);
           }
           if (state is  SignUpErrorState) {
             showSnackBar(context,state.exception.message ?? '');

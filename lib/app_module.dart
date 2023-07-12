@@ -92,25 +92,25 @@ class AppModule extends Module {
         ChildRoute(
           Routes.defaultRoute,
           transition: TransitionType.rightToLeftWithFade,
-          child: (_, args) => BlocProvider.value(
+          child: (_, __) => BlocProvider.value(
               value: Modular.get<SplashCubit>(), child: const SplashPage()),
         ),
         ChildRoute(
           Routes.signIn,
           transition: TransitionType.rightToLeftWithFade,
-          child: (_, args) => BlocProvider.value(
+          child: (_, __) => BlocProvider.value(
               value: Modular.get<SignInCubit>(), child: const SignInPage()),
         ),
         ChildRoute(
           Routes.signUp,
           transition: TransitionType.rightToLeftWithFade,
-          child: (_, args) => BlocProvider.value(
+          child: (_, __) => BlocProvider.value(
               value: Modular.get<SignUpCubit>(), child: const SignUpPage()),
         ),
         ChildRoute(
           Routes.home,
           transition: TransitionType.rightToLeftWithFade,
-          child: (_, args) => BlocProvider.value(
+          child: (_, __) => BlocProvider.value(
               value: Modular.get<HomeCubit>(), child: const HomePage()),
         ),
         ChildRoute(

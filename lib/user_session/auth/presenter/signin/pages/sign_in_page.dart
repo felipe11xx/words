@@ -40,7 +40,7 @@ class _SignInPageState extends State<SignInPage> {
           Modular.to.pushReplacementNamed(Routes.home);
         }
         if (state is SignInErrorState) {
-          showSnackBar(context,state.exception.message ?? '');
+          showSnackBar(context, state.exception.message ?? '');
         }
       },
       builder: (context, state) {
@@ -130,16 +130,14 @@ class _SignInPageState extends State<SignInPage> {
                 },
                 keyboardType: TextInputType.number,
                 focusNode: _focusPassword),
-
             SizedBox(
               height: 20.w,
             ),
-
             Row(
               children: [
                 Expanded(
                   child: AppSquareButton(
-                    isEnable:  isEnable,
+                    isEnable: isEnable,
                     onTap: () {
                       context.read<SignInCubit>().doSignIn(
                           SignInRequest(_tPassword.text, _tEmail.text));
@@ -153,14 +151,18 @@ class _SignInPageState extends State<SignInPage> {
                 )
               ],
             ),
-
             InkWell(
-              onTap: (){
-                Modular.to.pushNamed(Routes.signUp);
-              },
+                onTap: () {
+                  Modular.to.pushNamed(Routes.signUp);
+                },
                 child: Padding(
-                  padding: EdgeInsets.only(top:42.w, left: 16.w, right: 16.w),
-                  child: Text(Strings.signUp, style: AppTextStyles.overline.copyWith().copyWith(decoration: TextDecoration.underline,),),
+                  padding: EdgeInsets.only(top: 42.w, left: 16.w, right: 16.w),
+                  child: Text(
+                    Strings.signUp,
+                    style: AppTextStyles.overline.copyWith().copyWith(
+                          decoration: TextDecoration.underline,
+                        ),
+                  ),
                 ))
           ],
         ),

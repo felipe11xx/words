@@ -11,6 +11,14 @@ class HomeInitialState extends HomeState {
   List<Object?> get props => [];
 }
 
+class HomeLoadingState extends HomeState {
+
+  HomeLoadingState();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class UserSignOutSuccessState extends HomeState {
 
   UserSignOutSuccessState();
