@@ -1,8 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:words/all_words/presenter/cubit/home_state.dart';
-
 import '../../../shared/services/auth_service.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:words/home/presenter/cubit/home_state.dart';
 
 final $HomeCubit = Bind.singleton((i) => HomeCubit(i()));
 class HomeCubit extends Cubit<HomeState> {

@@ -1,5 +1,5 @@
-import '../../../all_words/presenter/cubit/cubits.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../home/presenter/cubit/cubits.dart';
 import '../../../shared/services/auth_service.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:words/user_history/domain/error/failure_user_history.dart';

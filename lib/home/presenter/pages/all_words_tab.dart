@@ -4,8 +4,8 @@ import '../../../shared/theme/theme.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../../shared/navigation/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:words/home/presenter/pages/pages.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:words/all_words/presenter/pages/pages.dart';
 import 'package:flutter_modular/flutter_modular.dart'    hide ModularWatchExtension;
 
 class AllWordsTab extends StatefulWidget {

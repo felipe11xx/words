@@ -9,12 +9,12 @@ abstract class IDoGetUserFavoritesUseCase {
   Future<Either<FailureUserFavorites, UserFavorites?>> call(String userId);
 }
 
-class DoGetUserHistoryUseCase implements IDoGetUserFavoritesUseCase {
+class DoGetUserFavoritesUseCase implements IDoGetUserFavoritesUseCase {
 
   final IGetUserFavoritesRepository _getUserFavoritesRepository;
 
 
-  DoGetUserHistoryUseCase( this._getUserFavoritesRepository, );
+  DoGetUserFavoritesUseCase( this._getUserFavoritesRepository, );
 
   @override
   Future<Either<FailureUserFavorites, UserFavorites?>> call(String userId) async{

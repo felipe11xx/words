@@ -1,14 +1,13 @@
 import 'package:hive/hive.dart';
-
-import '../data/datasource/save_user_favourites_datasource.dart';
 import '../data/model/user_favorites.dart';
 import '../domain/error/failure_user_favorites.dart';
+import '../data/datasource/set_user_favourites_datasource.dart';
 
-class DoSaveUserFavoritesDatasourceInternal implements IDoSaveUserFavoritesDatasource{
-  DoSaveUserFavoritesDatasourceInternal();
+class DoSetUserFavoritesDatasourceInternal implements IDoSetUserFavoritesDatasource{
+  DoSetUserFavoritesDatasourceInternal();
 
   @override
-  Future<bool> saveUserFavorites(String userId, String? word) async{
+  Future<bool> setUserFavorites(String userId, String? word) async{
     try {
       final userFavoritesBox = await Hive.openBox('userFavorites');
 
@@ -33,6 +32,4 @@ class DoSaveUserFavoritesDatasourceInternal implements IDoSaveUserFavoritesDatas
       );
     }
   }
-
-
 }

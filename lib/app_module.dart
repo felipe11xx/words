@@ -1,25 +1,31 @@
 import 'shared/navigation/routes.dart';
 import 'shared/network/custom_dio.dart';
+import 'home/presenter/pages/pages.dart';
 import 'shared/services/tts_service.dart';
-import 'all_words/presenter/pages/pages.dart';
+import 'home/presenter/cubit/cubits.dart';
+import 'user_favorites/data/repository/set_user_favorites_impl.dart';
+import 'user_favorites/domain/usecase/do_set_user_favorites_usecase.dart';
+import 'user_favorites/internal/set_user_favorites_datasource_internal.dart';
 import 'user_session/splash/cubit/cubits.dart';
-import 'all_words/presenter/cubit/cubits.dart';
 import 'dictionary/presenter/cubit/cubits.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:words/shared/services/auth_service.dart';
 import 'dictionary/presenter/page/completely_word_page.dart';
-import 'user_history/internal/get_user_datasource_internal.dart';
 import 'dictionary/external/get_completely_word_external.dart';
 import 'dictionary/domain/usecase/do_get_completely_word.dart';
+import 'user_history/internal/get_user_datasource_internal.dart';
+import 'package:words/user_favorites/presenter/cubit/cubits.dart';
+import 'package:words/dictionary/internal/save_completely_word.dart';
 import 'user_history/domain/usecase/do_get_user_history_usecase.dart';
 import 'user_history/domain/usecase/do_save_user_history_usecase.dart';
-import 'package:words/dictionary/internal/save_completely_word.dart';
 import 'package:words/shared/services/real_time_data_base_service.dart';
-import 'user_history/data/repository/get_user_history_repository_impl.dart';
-import 'package:words/user_history/internal/save_user_history_datasource_internal.dart';
+import 'user_favorites/domain/usecase/do_get_user_favorites_usecase.dart';
+import 'user_favorites/data/repository/get_favorites_repository_impl.dart';
 import 'dictionary/data/repository/get_completely_word_internal_impl.dart';
 import 'dictionary/data/repository/get_completely_word_external_impl.dart';
+import 'user_history/data/repository/get_user_history_repository_impl.dart';
+import 'user_favorites/internal/get_user_favorite_datasource_internal.dart';
 import 'package:words/user_session/splash/presenter/pages/splash_page.dart';
 import 'package:words/dictionary/internal/get_completely_word_internal.dart';
 import 'package:words/user_session/auth/presenter/signup/pages/sign_up_page.dart';
@@ -27,6 +33,7 @@ import 'package:words/user_session/auth/presenter/signin/pages/sign_in_page.dart
 import 'package:words/user_session/auth/presenter/signup/cubit/sign_up_cubit.dart';
 import 'package:words/user_session/auth/presenter/signin/cubit/sign_in_cubit.dart';
 import 'package:words/dictionary/domain/usecase/do_save_completely_word_usecase.dart';
+import 'package:words/user_history/internal/save_user_history_datasource_internal.dart';
 import 'package:words/user_history/data/repository/save_user_history_repository_impl.dart';
 import 'package:words/dictionary/data/repository/save_completely_word_repository_impl.dart';
 
@@ -57,17 +64,27 @@ class AppModule extends Module {
         Bind.singleton((i) => SaveCompletelyWordImpl(i())),
         $CompletelyWordCubit,
 
-        //all words
+        //history
         Bind.singleton((i) => DoSaveUserHistoryUseCase(i())),
         Bind.singleton((i) => SaveUserHistoryInternalImpl(i())),
         Bind.singleton((i) => DoSaveUserHistoryDatasourceInternal()),
-
         Bind.singleton((i) => DoGetUserHistoryUseCase(i())),
         Bind.singleton((i) => GetUserHistoryInternalImpl(i())),
         Bind.singleton((i) => DoGetUserHistoryDatasourceInternal()),
-        $HomeCubit,
         $HistoryCubit,
+
+        //Favorites
+        Bind.singleton((i) => DoSetUserFavoritesUseCase(i())),
+        Bind.singleton((i) => SetUserFavoritesInternalImpl(i())),
+        Bind.singleton((i) => DoSetUserFavoritesDatasourceInternal()),
+        Bind.singleton((i) => DoGetUserFavoritesUseCase(i())),
+        Bind.singleton((i) => GetUserFavoritesInternalImpl(i())),
+        Bind.singleton((i) => DoGetUserFavoritesDatasourceInternal()),
+        $FavoritesCubit,
+        //HOME
+        $HomeCubit,
         $AllWordsCubit,
+    
       ];
 
   @override

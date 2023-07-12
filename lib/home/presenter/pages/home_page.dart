@@ -1,3 +1,5 @@
+import 'package:words/user_favorites/presenter/cubit/cubits.dart';
+
 import 'pages.dart';
 import '../cubit/cubits.dart';
 import 'package:flutter/material.dart';
@@ -102,7 +104,9 @@ class _HomePageState extends State<HomePage> {
                 BlocProvider.value(
                     value: Modular.get<HistoryCubit>(),
                     child: const HistoryTab()),
-                const FavoritesTab(),
+                BlocProvider.value(
+                    value: Modular.get<FavoritesCubit>(),
+                    child: const FavoritesTab()),
               ],
             );
           },

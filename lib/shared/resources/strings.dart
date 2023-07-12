@@ -100,4 +100,7 @@ class Strings {
 
   ///'No Historic yet'
   static const noHistoricYet = 'No Historic yet';
+
+  ///'No Favorites yet'
+  static const noFavoritesYet = 'No Favorites yet';
 }
