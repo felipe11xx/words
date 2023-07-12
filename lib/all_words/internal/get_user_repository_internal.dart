@@ -8,11 +8,11 @@ class DoGetUserHistoryInternalDatasource implements IDoGetUserHistoryDataSource{
   DoGetUserHistoryInternalDatasource();
 
   @override
-  Future<UserHistory> doGetUseHistory(String? userId) async {
+  Future<UserHistory?> doGetUseHistory(String? userId) async {
     try {
       final userHistoryBox = await Hive.openBox('userHistory');
-      final userHistory = await userHistoryBox.get(userId);
-      return userHistory;
+      final userHistory = userHistoryBox.get(userId) as UserHistory?;
+      return userHistory ;
     } catch (e) {
       debugPrint('err ${e.toString()}' );
       throw UserHistoryDataSourceError(message: e.toString(), );

@@ -1,12 +1,9 @@
-import 'package:words/all_words/presenter/cubit/home_cubit.dart';
-import 'package:words/all_words/presenter/cubit/home_state.dart';
-
-import '../../../shared/navigation/routes.dart';
-import '../../../shared/widgets/widgets.dart';
 import 'pages.dart';
 import '../cubit/cubits.dart';
 import 'package:flutter/material.dart';
 import '../../../../shared/theme/theme.dart';
+import '../../../shared/widgets/widgets.dart';
+import '../../../shared/navigation/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../shared/resources/resources.dart';
 import 'package:flutter_modular/flutter_modular.dart'
@@ -58,6 +55,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         appBar: AppBar(
+          iconTheme:const IconThemeData(color: AppColors.white),
           title: Text(
             Strings.dictionary,
             style: AppTextStyles.headH6.copyWith(color: AppColors.white),
@@ -90,7 +88,8 @@ class _HomePageState extends State<HomePage> {
               showSnackBar(context, state.exception.message);
             }
             if (state is UserSignOutSuccessState) {
-              Modular.to.pushReplacementNamed(Routes.signIn);
+
+              Modular.to.pushReplacementNamed(Routes.signIn,);
             }
           },
           builder: (context, state) {
@@ -100,7 +99,9 @@ class _HomePageState extends State<HomePage> {
                   value: Modular.get<AllWordsCubit>(),
                   child: const AllWordsTab(),
                 ),
-                const HistoryTab(),
+                BlocProvider.value(
+                    value: Modular.get<HistoryCubit>(),
+                    child: const HistoryTab()),
                 const FavoritesTab(),
               ],
             );

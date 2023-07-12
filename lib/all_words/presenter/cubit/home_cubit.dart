@@ -13,10 +13,11 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       await _authServices.signOut();
       emit(UserSignOutSuccessState());
+      emit(HomeInitialState());
+
     } on AuthException catch (e) {
       emit(UserSignOutErrorState(e));
     }
-    await _authServices.signOut();
   }
 
   String? getUserEmail() {

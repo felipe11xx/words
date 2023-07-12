@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../../domain/error/failure_all_words.dart';
+
 abstract class HistoryState extends Equatable{}
 
 class HistoryInitialState extends HistoryState {
@@ -28,10 +30,19 @@ class HistorySuccessState extends HistoryState {
 
 
 class HistoryErrorState extends HistoryState {
-  final Exception exception;
+  final UserHistoryDataSourceError exception;
 
   HistoryErrorState(this.exception);
 
   @override
   List<Object?> get props => [exception];
+}
+
+class HistoryEmptyState extends HistoryState {
+  final bool prop;
+
+  HistoryEmptyState(this.prop);
+
+  @override
+  List<Object?> get props => [prop];
 }

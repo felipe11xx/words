@@ -12,7 +12,7 @@ class DoSaveUserHistoryInternalDatasource implements IDoSaveUserHistoryDatasourc
   @override
   Future<bool> saveUserHistory(String userId, String? word) async{
       try {
-        final userHistoricBox = await Hive.openBox('historicUser');
+        final userHistoricBox = await Hive.openBox('userHistory');
 
         final userHistory = userHistoricBox.get(userId) as UserHistory?;
         if (userHistory != null) {

@@ -12,7 +12,7 @@ class GetUserHistoryInternalImpl implements IGetUserHistoryRepository {
   GetUserHistoryInternalImpl(this.dataSource);
 
   @override
-  Future<Either<FailureAllWords, UserHistory>> getUserHistory(String? userId) async {
+  Future<Either<FailureAllWords, UserHistory?>> getUserHistory(String? userId) async {
     try{
       final result = await dataSource.doGetUseHistory(userId);
       return Right(result);

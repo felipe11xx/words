@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import '../../../../shared/theme/theme.dart';
-import '../../../../shared/navigation/routes.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import '../../../shared/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WordItem extends StatelessWidget {
-  const WordItem({super.key, required this.word});
+  const WordItem({super.key, required this.word, required this.onClickItem});
 
   final String? word;
+  final void Function()? onClickItem;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Modular.to.pushNamed(Routes.wordCompletely,arguments: word);
-      },
+      onTap:onClickItem,
+        // Modular.to.pushNamed(Routes.wordCompletely,arguments: word);
+
       child: Container(
         padding: EdgeInsets.all(8.w),
         width: 50.w,

@@ -97,4 +97,7 @@ class Strings {
 
   ///Welcome this a english dictionary app :)'
   static const presentation = 'Welcome this a english dictionary app :)';
+
+  ///'No Historic yet'
+  static const noHistoricYet = 'No Historic yet';
 }
