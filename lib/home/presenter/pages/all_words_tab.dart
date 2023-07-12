@@ -1,3 +1,5 @@
+import 'package:firebase_ui_database/firebase_ui_database.dart';
+
 import '../cubit/cubits.dart';
 import 'package:flutter/cupertino.dart';
 import '../../../shared/theme/theme.dart';
@@ -6,7 +8,8 @@ import '../../../shared/navigation/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:words/home/presenter/pages/pages.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_modular/flutter_modular.dart'    hide ModularWatchExtension;
+import 'package:flutter_modular/flutter_modular.dart'
+    hide ModularWatchExtension;
 
 class AllWordsTab extends StatefulWidget {
   const AllWordsTab({super.key});
@@ -18,7 +21,7 @@ class AllWordsTab extends StatefulWidget {
 class _AllWordsTabState extends State<AllWordsTab> {
   @override
   void initState() {
-    context.read<AllWordsCubit>().getWords();
+    /// context.read<AllWordsCubit>().getWords();
     super.initState();
   }
 
@@ -37,38 +40,44 @@ class _AllWordsTabState extends State<AllWordsTab> {
             );
           }
 
-          if (state is AllWordsSuccessState) {
-            return GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                ),
-                itemCount: state.list.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return WordItem(
-                    word: state.list[index],
-                    onClickItem: () {
+          return FirebaseDatabaseQueryBuilder(
+              query: context.read<AllWordsCubit>().getWordsQuery(),
+              builder: (context, snapshot, _) {
+                return GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                    ),
+                    itemCount: snapshot.docs.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      if (snapshot.isFetching) {
+                        return Center(
+                          child: AppProgressIndicator(
+                            color: AppColors.secondary_light,
+                            width: 100.w,
+                            height: 100.w,
+                          ),
+                        );
+                      }
+                      if (snapshot.hasMore &&
+                          index + 1 == snapshot.docs.length) {
+                        // Tell FirebaseDatabaseQueryBuilder to try to obtain more items.
+                        // It is safe to call this function from within the build method.
+                        snapshot.fetchMore();
+                      }
+                      return WordItem(
+                        word: snapshot.docs[index].key,
+                        onClickItem: () {
+                          Modular.to.pushNamed(Routes.wordCompletely,
+                              arguments: snapshot.docs[index].key);
+                          context
+                              .read<AllWordsCubit>()
+                              .saveUserHistory(snapshot.docs[index].key);
+                        },
+                      );
+                    });
+              });
 
-                      Modular.to.pushNamed(Routes.wordCompletely,arguments: state.list[index]);
-                      context
-                          .read<AllWordsCubit>()
-                          .saveUserHistory(state.list[index]);
-
-                    },
-                  );
-                });
-          }
-
-          if (state is AllWordsErrorState) {
-            return AppErrorScreen(
-                error: state.exception.toString(),
-                onPressed: () {
-                  context.read<AllWordsCubit>().getWords();
-                });
-          }
-
-          return AppErrorScreen(onPressed: () {
-            context.read<AllWordsCubit>().getWords();
-          });
         });
   }
 }

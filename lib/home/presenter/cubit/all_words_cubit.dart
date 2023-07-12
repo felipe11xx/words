@@ -16,17 +16,9 @@ class AllWordsCubit extends Cubit<AllWordsState> {
   AllWordsCubit(this._realTimeDataBaseService,this._doSaveUserHistoryUseCase, this._authServices)
       : super(AllWordsStateInitialState());
 
-  getWords() async {
-    emit(AllWordsStateLoadingState(true));
 
-    try {
-      var result = await _realTimeDataBaseService.getWords();
-      emit(AllWordsSuccessState(result));
-    } catch (e) {
-      emit(AllWordsErrorState(e as Exception));
-    }
-  }
 
+  getWordsQuery() => _realTimeDataBaseService.getWordsQuery;
 
   saveUserHistory(String? word)async{
 
