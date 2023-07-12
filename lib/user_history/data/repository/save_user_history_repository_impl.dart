@@ -20,8 +20,4 @@ class SaveUserHistoryInternalImpl implements ISaveUserHistoryRepository {
     return Left(UserHistoryDataSourceError(message:Strings.genericError));
     }
   }
-
-
-
-
 }

@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:words/shared/services/hive_service.dart';
 import 'user_history/data/model/adapter/user_history_adapter.dart';
+import 'package:words/user_favorites/data/model/adapter/user_favorites_adapter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +17,7 @@ void main() async {
 
   await HiveService.start();
   Hive.registerAdapter(UserHistoryAdapter());
+  Hive.registerAdapter(UserFavoritesAdapter());
 
   runApp(ModularApp(
     module: AppModule(),

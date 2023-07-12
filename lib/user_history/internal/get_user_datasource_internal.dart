@@ -8,7 +8,7 @@ class DoGetUserHistoryDatasourceInternal implements IDoGetUserHistoryDataSource{
   DoGetUserHistoryDatasourceInternal();
 
   @override
-  Future<UserHistory?> doGetUseHistory(String? userId) async {
+  Future<UserHistory?> doGetUserHistory(String? userId) async {
     try {
       final userHistoryBox = await Hive.openBox('userHistory');
       final userHistory = userHistoryBox.get(userId) as UserHistory?;
