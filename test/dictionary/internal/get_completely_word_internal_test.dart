@@ -2,48 +2,47 @@ import 'dart:convert';
 import 'package:hive/hive.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:words/dictionary/data/model/models.dart';
 import 'package:words/shared/services/hive_service.dart';
+import 'package:words/dictionary/data/model/completely_word.dart';
 import 'package:words/dictionary/domain/error/failure_dictionary.dart';
-import 'package:words/dictionary/internal/save_completely_word_internal.dart';
+import 'package:words/dictionary/internal/get_completely_word_internal.dart';
 
 class HiveServiceMock extends Mock implements HiveService {}
 class BoxMock extends Mock implements Box {}
 
-
 void main() {
-  late SaveCountriesInternalDatasource datasource;
-  late HiveService mockHiveService;
+  late DoGetCompletelyWordInternalDatasource datasource;
+  late HiveService hiveServiceMock;
   late Box boxMock;
   late CompletelyWord completelyWord;
   setUp(() {
-    mockHiveService = HiveServiceMock();
+    hiveServiceMock = HiveServiceMock();
     boxMock = BoxMock();
-    datasource = SaveCountriesInternalDatasource(mockHiveService);
+    datasource = DoGetCompletelyWordInternalDatasource(hiveServiceMock) ;
     completelyWord = CompletelyWord.fromJson(jsonDecode(completelyWordJson));
   });
 
-  group('saveCompletelyWord', () {
+  group('doGetUserHistory', () {
 
-    test('should save completely word to box', () async {
-      when(() => mockHiveService.openBox('completelyWord')).thenAnswer((_) async => boxMock);
-      when(()=>boxMock.put(completelyWord.word,completelyWord.toJson())).thenAnswer((_)async => true );
+    test('should return CompletelyWord when data is available in the box', () async {
 
-      final result = await datasource.saveCompletelyWord(completelyWord);
+      when(()=>hiveServiceMock.openBox('completelyWord')).thenAnswer((_) async => boxMock);
+      when(()=>boxMock.get('example')).thenReturn(completelyWord.toJson());
 
-      expect(result, isTrue);
-      verify(() => mockHiveService.openBox('completelyWord')).called(1);
-      verify(() => boxMock.put(completelyWord.word, completelyWord.toJson())).called(1);
+      final result = await datasource.doGetCompletelyWord('example');
+
+      expect(result, isA<CompletelyWord>());
+      verify(()=>hiveServiceMock.openBox('completelyWord')).called(1);
+      verify(()=>boxMock.get('example')).called(1);
     });
 
-    test('should throw SaveCompletelyWordDataSourceError when an error occurs', () async {
+    test('should throw CompletelyWordDataSourceError when an error occurs', () async {
       final error = Exception('Test Error');
 
-      when(() => mockHiveService.openBox('completelyWord')).thenThrow(error);
+      when(()=>hiveServiceMock.openBox('completelyWord')).thenThrow(error);
 
-      expect(() => datasource.saveCompletelyWord(completelyWord),
-          throwsA(isA<SaveCompletelyWordDataSourceError>()));
-      verify(() => mockHiveService.openBox('completelyWord')).called(1);
+      expect(() => datasource.doGetCompletelyWord('example'), throwsA(isA<CompletelyWordDataSourceError>()));
+      verify(()=>hiveServiceMock.openBox('completelyWord')).called(1);
     });
   });
 }
@@ -225,3 +224,4 @@ const completelyWordJson = '''
   "frequency": 4.67
 }
 ''';
+
