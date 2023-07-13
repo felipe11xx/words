@@ -12,10 +12,8 @@ class HomeCubit extends Cubit<HomeState> {
   signOut() async {
     try {
       emit(HomeLoadingState());
-      debugPrint("HomeLoadingState");
       await _authServices.signOut();
       emit(UserSignOutSuccessState());
-      debugPrint("UserSignOutSuccessState");
       emit(HomeInitialState());
 
     } on AuthException catch (e) {

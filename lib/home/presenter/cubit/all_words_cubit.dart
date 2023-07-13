@@ -21,9 +21,7 @@ class AllWordsCubit extends Cubit<AllWordsState> {
   getWordsQuery() => _realTimeDataBaseService.getWordsQuery;
 
   saveUserHistory(String? word)async{
-
    await _doSaveUserHistoryUseCase.call( getUserId(), word);
-
   }
 
   String getUserId() {

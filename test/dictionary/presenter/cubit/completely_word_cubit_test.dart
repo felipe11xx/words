@@ -70,6 +70,11 @@ void main() {
       );
     });
 
+
+    test('initial state should be CompleteWordInitialState', () {
+      expect(completelyWordCubit.state, equals(CompleteWordInitialState()));
+    });
+
     blocTest<CompletelyWordCubit, CompletelyWordState>(
       'emits CompleteWordSuccessState when getCompletelyWord is successful',
       build: () {
