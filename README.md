@@ -1,5 +1,3 @@
-
-
 <p align="center">
 
   <h1 align="center">Words english Dictionary</h1>
@@ -26,7 +24,6 @@
 - [Quick start](#quick-start)
 - [What's included](#whats-included)
 - [Frameworks](#frameworks)
-- [Unit test](#unit-test)
 - [Creators](#creators)
 
 ## Quick start
@@ -103,9 +100,6 @@
 
 * <a href="https://github.com/ixsans/text_to_speech">text_to_speech</a> This repo uses text_to_speech for the user to hear the words on the dictionary screen
   * text_to_speech: ^0.2.3
-
-
-## Unit test
 
 
 ## Creators
