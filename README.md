@@ -2,7 +2,7 @@
 
 <p align="center">
 
-  <h3 align="center">Words english Dictionary</h3>
+  <h1 align="center">Words english Dictionary</h1>
 
   <p align="center">
     An english words dictionary 
@@ -36,6 +36,17 @@
 * run `flutter doctor -v` check if there is no problem with Flutter and Dart on your machine
 * run `flutter clean`
 * run `flutter pub get`
+
+* after installing and configuring the project.
+    
+  generate an API key on the <a href= "https://rapidapi.com/dpventures/api/wordsapi/pricing">WordsAPI</a> website and create a file called api_keys.dart in the directory `lib/shared/network`
+  then in the file write the following code below 
+  ```
+  class ApiKeys{
+  static const rapidApikey = 'Your_key';
+  }
+  ```
+
 
 ## What's included
 
