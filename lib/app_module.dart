@@ -1,3 +1,6 @@
+import 'package:hive/hive.dart';
+import 'package:words/shared/services/hive_service.dart';
+
 import 'shared/navigation/routes.dart';
 import 'shared/network/custom_dio.dart';
 import 'home/presenter/pages/pages.dart';
@@ -45,6 +48,7 @@ class AppModule extends Module {
         Bind((i) => AppTTS()),
         Bind((i) => RealTimeDataBaseService()),
         Bind((i) => AuthService()),
+        Bind((i) => HiveService()),
 
         //auth
         $SignInCubit,
@@ -52,14 +56,14 @@ class AppModule extends Module {
         $SplashCubit,
 
         //get Completely Word
-        Bind.singleton((i) => DoGetCompletelyWordInternalDatasource()),
+        Bind.singleton((i) => DoGetCompletelyWordInternalDatasource(i())),
         Bind.singleton((i) => GetCompletelyWordInternalImpl(
             i<DoGetCompletelyWordInternalDatasource>())),
         Bind.singleton((i) => DoGetCompletelyWordExternalDatasource(i())),
         Bind.singleton((i) => GetCompletelyWordExternalImpl(
             i<DoGetCompletelyWordExternalDatasource>())),
         Bind.singleton((i) => DoGetCompletelyWordUseCase(i(), i())),
-        Bind.singleton((i) => SaveCountriesInternalDatasource()),
+        Bind.singleton((i) => SaveCountriesInternalDatasource(i())),
         Bind.singleton((i) => DoSaveCompletelyWordUseCase(i())),
         Bind.singleton((i) => SaveCompletelyWordImpl(i())),
         $CompletelyWordCubit,
@@ -67,19 +71,19 @@ class AppModule extends Module {
         //history
         Bind.singleton((i) => DoSaveUserHistoryUseCase(i())),
         Bind.singleton((i) => SaveUserHistoryInternalImpl(i())),
-        Bind.singleton((i) => DoSaveUserHistoryDatasourceInternal()),
+        Bind.singleton((i) => DoSaveUserHistoryDatasourceInternal(i())),
         Bind.singleton((i) => DoGetUserHistoryUseCase(i())),
         Bind.singleton((i) => GetUserHistoryInternalImpl(i())),
-        Bind.singleton((i) => DoGetUserHistoryDatasourceInternal()),
+        Bind.singleton((i) => DoGetUserHistoryDatasourceInternal(i())),
         $HistoryCubit,
 
         //Favorites
         Bind.singleton((i) => DoSetUserFavoritesUseCase(i())),
         Bind.singleton((i) => SetUserFavoritesInternalImpl(i())),
-        Bind.singleton((i) => DoSetUserFavoritesDatasourceInternal()),
+        Bind.singleton((i) => DoSetUserFavoritesDatasourceInternal(i())),
         Bind.singleton((i) => DoGetUserFavoritesUseCase(i())),
         Bind.singleton((i) => GetUserFavoritesInternalImpl(i())),
-        Bind.singleton((i) => DoGetUserFavoritesDatasourceInternal()),
+        Bind.singleton((i) => DoGetUserFavoritesDatasourceInternal(i())),
         $FavoritesCubit,
         //HOME
         $HomeCubit,
