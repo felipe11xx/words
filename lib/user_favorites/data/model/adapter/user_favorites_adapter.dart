@@ -22,4 +22,5 @@ class UserFavoritesAdapter extends TypeAdapter<UserFavorites> {
     writer.writeString(obj.userId);
     writer.writeStringList(obj.wordsFavorites);
   }
+
 }
