@@ -11,38 +11,39 @@ class BoxMock extends Mock implements Box {}
 
 void main() {
   late DoGetUserHistoryDatasourceInternal datasource;
-  late HiveService mockHiveService;
+  late HiveService hiveServiceMock;
   late Box boxMock;
+  late String userId;
+  late  UserHistory userHistory;
   setUp(() {
-    mockHiveService = HiveServiceMock();
+    hiveServiceMock = HiveServiceMock();
     boxMock = BoxMock();
-    datasource = DoGetUserHistoryDatasourceInternal(mockHiveService);
+    datasource = DoGetUserHistoryDatasourceInternal(hiveServiceMock);
+     userId = 'user123';
+     userHistory = UserHistory(userId: userId, wordHistory: []);
   });
 
   group('doGetUserHistory', () {
-    const userId = 'user123';
 
     test('should return UserHistory when data is available in the box', () async {
 
-      final userHistory = UserHistory(userId: '', wordHistory: []/* your user history data here */);
-
-      when(()=>mockHiveService.openBox('userHistory')).thenAnswer((_) async => boxMock);
+      when(()=>hiveServiceMock.openBox('userHistory')).thenAnswer((_) async => boxMock);
       when(()=>boxMock.get(userId)).thenReturn(userHistory);
 
       final result = await datasource.doGetUserHistory(userId);
 
       expect(result, equals(userHistory));
-      verify(()=>mockHiveService.openBox('userHistory')).called(1);
+      verify(()=>hiveServiceMock.openBox('userHistory')).called(1);
       verify(()=>boxMock.get(userId)).called(1);
     });
 
     test('should throw UserHistoryDataSourceError when an error occurs', () async {
       final error = Exception('Test Error');
 
-      when(()=>mockHiveService.openBox('userHistory')).thenThrow(error);
+      when(()=>hiveServiceMock.openBox('userHistory')).thenThrow(error);
 
       expect(() => datasource.doGetUserHistory(userId), throwsA(isA<UserHistoryDataSourceError>()));
-      verify(()=>mockHiveService.openBox('userHistory')).called(1);
+      verify(()=>hiveServiceMock.openBox('userHistory')).called(1);
     });
   });
 }

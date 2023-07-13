@@ -1,4 +1,3 @@
-import 'package:hive/hive.dart';
 import 'package:words/dictionary/data/model/models.dart';
 import 'package:words/dictionary/domain/error/failure_dictionary.dart';
 import 'package:words/dictionary/data/datasource/save_completely_word_datasource.dart';

@@ -17,7 +17,7 @@ import 'dictionary/domain/usecase/do_get_completely_word_usecase.dart';
 import 'user_history/internal/get_user_datasource_internal.dart';
 import 'package:words/user_favorites/presenter/cubit/cubits.dart';
 import 'user_favorites/data/repository/set_user_favorites_impl.dart';
-import 'package:words/dictionary/internal/save_completely_word.dart';
+import 'package:words/dictionary/internal/save_completely_word_internal.dart';
 import 'user_history/domain/usecase/do_get_user_history_usecase.dart';
 import 'user_history/domain/usecase/do_save_user_history_usecase.dart';
 import 'package:words/shared/services/real_time_data_base_service.dart';
