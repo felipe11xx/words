@@ -37,13 +37,13 @@ class CompletelyWordCubit extends Cubit<CompletelyWordState> {
     emit(CompleteWordLoadingState(true));
 
     final result = await _wordUseCase.call(word);
-     _isFavorite(word);
+     isFavorite(word);
     result.fold(
       (l) => emit(CompleteWordErrorState(l as CompletelyWordDataSourceError)),
       (r) async {
         await _saveCompletelyWordUseCase.call(r);
         emit(
-          CompleteWordSuccessState(r, _getMeanings(r), await _isFavorite(word)),
+          CompleteWordSuccessState(r, _getMeanings(r), await isFavorite(word)),
         );
       },
     );
@@ -60,7 +60,7 @@ class CompletelyWordCubit extends Cubit<CompletelyWordState> {
     return meanings;
   }
 
-  Future<bool> _isFavorite(String? word) async {
+  Future<bool> isFavorite(String? word) async {
     var result = await _getUserFavoritesUseCase.call(getUserId());
     bool isFavorite = false;
     result.fold((l) {
