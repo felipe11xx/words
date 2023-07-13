@@ -25,10 +25,3 @@ String? validateEmail(String? value) {
   }
   return null;
 }
-
-String? validateConfirmPassword(String? password, String? confirmPassword) {
-  if (password != confirmPassword) {
-      return Strings.passwordsDoNotMatch;
-  }
-  return null;
-}

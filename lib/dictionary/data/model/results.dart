@@ -25,9 +25,9 @@ class Results {
     return Results(
       definition: json['definition'],
       partOfSpeech: json['partOfSpeech'],
-      synonyms: json["item_names"] == null
+      synonyms: json["synonyms"] == null
           ? []
-          : List<String>.from(json["item_names"].map((x) => x)),
+          : List<String>.from(json["synonyms"].map((x) => x)),
       typeOf: json["typeOf"] == null
           ? []
           : List<String>.from(json["typeOf"].map((x) => x)),
@@ -43,8 +43,8 @@ class Results {
     );
   }
 
-  Map<dynamic, dynamic> toJson() {
-    final Map<dynamic, dynamic> data = <dynamic, dynamic>{};
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['definition'] = definition;
     data['partOfSpeech'] = partOfSpeech;
     data['synonyms'] = synonyms;

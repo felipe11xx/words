@@ -33,8 +33,8 @@ class CompletelyWord {
     );
   }
 
-  Map<dynamic, dynamic> toJson() {
-    final Map<dynamic, dynamic> data = <dynamic, dynamic>{};
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['word'] = word;
     if (results != null) {
       data['results'] = results!.map((v) => v.toJson()).toList();

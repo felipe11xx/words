@@ -22,6 +22,4 @@ class GetCompletelyWordInternalImpl implements IGetCompletelyWordInternalReposit
       return Left(CompletelyWordDataSourceError(message:Strings.genericError));
     }
   }
-
-
 }

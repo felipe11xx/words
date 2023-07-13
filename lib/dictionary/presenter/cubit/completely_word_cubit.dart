@@ -5,7 +5,7 @@ import '../../domain/error/failure_dictionary.dart';
 import '../../../../shared/services/tts_service.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:words/dictionary/data/model/models.dart';
-import 'package:words/dictionary/domain/usecase/do_get_completely_word.dart';
+import 'package:words/dictionary/domain/usecase/do_get_completely_word_usecase.dart';
 import '../../../user_favorites/domain/usecase/do_get_user_favorites_usecase.dart';
 import 'package:words/dictionary/domain/usecase/do_save_completely_word_usecase.dart';
 import 'package:words/user_favorites/domain/usecase/do_set_user_favorites_usecase.dart';

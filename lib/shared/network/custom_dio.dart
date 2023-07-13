@@ -19,7 +19,6 @@ class CustomDio extends DioForNative {
 
 class CustomInterceptor extends Interceptor {
 
-
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     debugPrint("##### Log _onRequest CustomDio #### ${options.path}");

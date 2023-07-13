@@ -10,7 +10,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:words/shared/services/auth_service.dart';
 import 'dictionary/presenter/page/completely_word_page.dart';
 import 'dictionary/external/get_completely_word_external.dart';
-import 'dictionary/domain/usecase/do_get_completely_word.dart';
+import 'dictionary/domain/usecase/do_get_completely_word_usecase.dart';
 import 'user_history/internal/get_user_datasource_internal.dart';
 import 'package:words/user_favorites/presenter/cubit/cubits.dart';
 import 'user_favorites/data/repository/set_user_favorites_impl.dart';
