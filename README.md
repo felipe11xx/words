@@ -27,7 +27,7 @@
 - [Creators](#creators)
 
 ## Quick start
-
+* We Follow Clean arch and Solid Patterns to made this app.
 * This is a normal flutter app. You should follow the instructions in the [official documentation](https://flutter.io/docs/get-started/install).
 * Clone Project
 * run `flutter doctor -v` check if there is no problem with Flutter and Dart on your machine
