@@ -15,10 +15,9 @@ class SaveCountriesInternalDatasource implements ISaveCompleteWordDataSource {
   Future<bool> saveCompletelyWord(CompletelyWord completelyWord) async {
     try {
       final boxWordsCompletely = await hive.openBox(
-        'completelyWord', // Path where to store your boxes (Only used in Flutter / Dart IO)
+        'completelyWord',
       );
       boxWordsCompletely.put(completelyWord.word, completelyWord.toJson());
-
       return true;
     } catch (e) {
       throw SaveCompletelyWordDataSourceError(
