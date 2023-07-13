@@ -53,7 +53,8 @@
     <img src="https://skillicons.dev/icons?i=firebase" />
   </a>
 
-This repository is using Firebase. We use Firebase Auth and Realtime Database to control access and user registration and also save and access the list with all the words in the English language
+* This repository is using Firebase. We use Firebase Auth and Realtime Database to control access and user registration and also save and access the list with all the words in the English language
+
   * firebase_core: ^2.1.1
   * firebase_database: ^10.2.3
   * firebase_auth: ^4.6.3
