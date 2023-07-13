@@ -1,57 +1,42 @@
 import 'package:dartz/dartz.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:words/user_favorites/data/model/user_favorites.dart';
-import 'package:words/user_favorites/data/repository/get_favorites_repository_impl.dart';
 import 'package:words/user_favorites/domain/error/failure_user_favorites.dart';
-import 'package:words/user_favorites/data/datasource/get_favorites_datasource.dart';
+import 'package:words/user_favorites/domain/repository/get_user_favorites_repository.dart';
+import 'package:words/user_favorites/domain/usecase/do_get_user_favorites_usecase.dart';
 
-class DoGetUserFavoritesDataSourceMock extends Mock implements IDoGetUserFavoritesDataSource {}
+class GetUserFavoritesRepositoryMock extends Mock implements IGetUserFavoritesRepository {}
 
 void main() {
-  late GetUserFavoritesInternalImpl repository;
-  late IDoGetUserFavoritesDataSource dataSourceMock;
+  late DoGetUserFavoritesUseCase useCase;
+  late IGetUserFavoritesRepository repositoryMock;
   late UserFavorites userFavorites;
-  late String userId;
   setUp(() {
-    dataSourceMock = DoGetUserFavoritesDataSourceMock();
-    repository = GetUserFavoritesInternalImpl(dataSourceMock);
-    userId = 'id';
-    userFavorites = UserFavorites(userId: userId,wordsFavorites: ['word']);
+    repositoryMock = GetUserFavoritesRepositoryMock();
+    useCase = DoGetUserFavoritesUseCase(repositoryMock);
+    userFavorites = UserFavorites(userId: "123", wordsFavorites: ['word']);
   });
 
-  group('GetUserFavoritesInternalImpl', () {
+  group('DoGetUserFavoritesUseCase', () {
 
-    test('should return user favorites when the data source returns a result', () async {
-      when(() => dataSourceMock.doGetUserFavorites(userId)).thenAnswer((_) async => userFavorites);
+    test('should return user favorites when repository returns a result', () async {
+      when(() => repositoryMock.getUserFavorites(userFavorites.userId)).thenAnswer((_) async => Right(userFavorites));
 
-      final result = await repository.getUserFavorites(userId);
+      final result = await useCase.call(userFavorites.userId);
 
       expect(result, equals(Right(userFavorites)));
-      verify(() => dataSourceMock.doGetUserFavorites(userId)).called(1);
+      verify(() => repositoryMock.getUserFavorites(userFavorites.userId)).called(1);
     });
 
-    test('should return UserFavoritesDataSourceError when the data source throws a UserFavoritesDataSourceError', () async {
-      final error = UserFavoritesDataSourceError(message: 'Test Error');
-      when(() => dataSourceMock.doGetUserFavorites(userId)).thenThrow(error);
+    test('should return FailureUserFavorites when repository returns a failure', () async {
+      final failure = UserFavoritesDataSourceError(message: 'Test Failure');
+      when(() => repositoryMock.getUserFavorites(userFavorites.userId)).thenAnswer((_) async => Left(failure));
 
-      final result = await repository.getUserFavorites(userId);
+      final result = await useCase.call(userFavorites.userId);
 
-      expect(result, equals(Left(error)));
-      verify(() => dataSourceMock.doGetUserFavorites(userId)).called(1);
-    });
-
-    test('should return UserFavoritesDataSourceError with generic error message when an unknown error occurs', () async {
-      final failure = UserFavoritesDataSourceError(message: 'any_error');
-
-
-      when(() => dataSourceMock.doGetUserFavorites(userId)).thenThrow(failure);
-
-      final result = await repository.getUserFavorites(userId);
-
-      expect(result.fold((failure) => failure, (userFavorites) => userFavorites), failure);
-
-      verify(() => dataSourceMock.doGetUserFavorites(userId)).called(1);
+      expect(result, equals(Left(failure)));
+      verify(() => repositoryMock.getUserFavorites(userFavorites.userId)).called(1);
     });
   });
 }

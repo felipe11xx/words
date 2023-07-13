@@ -1,56 +1,42 @@
 import 'package:dartz/dartz.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:words/user_favorites/data/datasource/set_user_favourites_datasource.dart';
-import 'package:words/user_favorites/data/repository/set_user_favorites_impl.dart';
-import 'package:words/user_favorites/domain/error/failure_user_favorites.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:words/user_history/domain/error/failure_user_history.dart';
+import 'package:words/user_history/domain/repository/save_user_history_repository.dart';
+import 'package:words/user_history/domain/usecase/do_save_user_history_usecase.dart';
 
-class DoSetUserFavoritesDataSourceMock extends Mock implements IDoSetUserFavoritesDatasource {}
+class MockSaveUserHistoryRepository extends Mock implements ISaveUserHistoryRepository {}
 
 void main() {
-  late SetUserFavoritesInternalImpl repository;
-  late IDoSetUserFavoritesDatasource dataSourceMock;
-  late bool expectResult ;
+  late DoSaveUserHistoryUseCase useCase;
+  late MockSaveUserHistoryRepository mockRepository;
+
   setUp(() {
-    dataSourceMock = DoSetUserFavoritesDataSourceMock();
-    repository = SetUserFavoritesInternalImpl(dataSourceMock);
-    expectResult = true;
+    mockRepository = MockSaveUserHistoryRepository();
+    useCase = DoSaveUserHistoryUseCase(mockRepository);
   });
 
-  group('SetUserFavoritesInternalImpl', () {
+  group('DoSaveUserHistoryUseCase', () {
     const userId = 'user123';
     const word = 'example';
 
-    test('should return true when the data source successfully sets user favorites', () async {
-      when(() => dataSourceMock.setUserFavorites(userId, word)).thenAnswer((_) async => true);
+    test('should return true when repository saves user history successfully', () async {
+      when(() => mockRepository.saveUserHistory(userId, word)).thenAnswer((_) async => Right(true));
 
-      final result = await repository.setUserFavorites(userId, word);
+      final result = await useCase.call(userId, word);
 
-      expect(result, equals(Right(expectResult)));
-      verify(() => dataSourceMock.setUserFavorites(userId, word)).called(1);
+      expect(result, equals(Right(true)));
+      verify(() => mockRepository.saveUserHistory(userId, word)).called(1);
     });
 
-    test('should return UserFavoritesDataSourceError when the data source throws a UserFavoritesDataSourceError', () async {
-      final error = UserFavoritesDataSourceError(message: 'Test Error');
-      when(() => dataSourceMock.setUserFavorites(userId, word)).thenThrow(error);
+    test('should return FailureUserHistory when repository returns a failure', () async {
+      final failure = UserHistoryDataSourceError(message: 'Test Failure');
+      when(() => mockRepository.saveUserHistory(userId, word)).thenAnswer((_) async => Left(failure));
 
-      final result = await repository.setUserFavorites(userId, word);
+      final result = await useCase.call(userId, word);
 
-      expect(result, equals(Left(error)));
-      verify(() => dataSourceMock.setUserFavorites(userId, word)).called(1);
-    });
-
-    test('should return UserFavoritesDataSourceError with generic error message when an unknown error occurs', () async {
-
-      final failure = UserFavoritesDataSourceError(message: 'any_error');
-
-      when(() => dataSourceMock.setUserFavorites(userId, word)).thenThrow(failure);
-
-      final result = await repository.setUserFavorites(userId, word);
-
-      expect(result.fold((failure) => failure, (userFavorites) => userFavorites), failure);
-
-      verify(() => dataSourceMock.setUserFavorites(userId, word)).called(1);
+      expect(result, equals(Left(failure)));
+      verify(() => mockRepository.saveUserHistory(userId, word)).called(1);
     });
   });
 }

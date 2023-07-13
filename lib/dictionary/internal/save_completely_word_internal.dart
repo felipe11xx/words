@@ -5,11 +5,11 @@ import 'package:words/dictionary/data/datasource/save_completely_word_datasource
 import '../../shared/services/hive_service.dart';
 
 
-class SaveCountriesInternalDatasource implements ISaveCompleteWordDataSource {
+class SaveCompleteWordInternalDatasource implements ISaveCompleteWordDataSource {
 
   final HiveService hive;
 
-  SaveCountriesInternalDatasource(this.hive);
+  SaveCompleteWordInternalDatasource(this.hive);
 
   @override
   Future<bool> saveCompletelyWord(CompletelyWord completelyWord) async {

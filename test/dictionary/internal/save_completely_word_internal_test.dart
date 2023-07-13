@@ -12,14 +12,14 @@ class BoxMock extends Mock implements Box {}
 
 
 void main() {
-  late SaveCountriesInternalDatasource datasource;
+  late SaveCompleteWordInternalDatasource datasource;
   late HiveService mockHiveService;
   late Box boxMock;
   late CompletelyWord completelyWord;
   setUp(() {
     mockHiveService = HiveServiceMock();
     boxMock = BoxMock();
-    datasource = SaveCountriesInternalDatasource(mockHiveService);
+    datasource = SaveCompleteWordInternalDatasource(mockHiveService);
     completelyWord = CompletelyWord.fromJson(jsonDecode(completelyWordJson));
   });
 

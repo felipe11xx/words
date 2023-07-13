@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:words/user_history/data/datasource/get_user_history_datasource.dart';
+import '../../../shared/resources/strings.dart';
 import 'package:words/user_history/data/model/user_history.dart';
 import 'package:words/user_history/domain/error/failure_user_history.dart';
+import 'package:words/user_history/data/datasource/get_user_history_datasource.dart';
 import 'package:words/user_history/domain/repository/get_user_history_repository.dart';
-
-import '../../../shared/resources/strings.dart';
 
 class GetUserHistoryInternalImpl implements IGetUserHistoryRepository {
   final IDoGetUserHistoryDataSource dataSource;

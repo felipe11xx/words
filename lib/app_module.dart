@@ -63,7 +63,7 @@ class AppModule extends Module {
         Bind.singleton((i) => GetCompletelyWordExternalImpl(
             i<DoGetCompletelyWordExternalDatasource>())),
         Bind.singleton((i) => DoGetCompletelyWordUseCase(i(), i())),
-        Bind.singleton((i) => SaveCountriesInternalDatasource(i())),
+        Bind.singleton((i) => SaveCompleteWordInternalDatasource(i())),
         Bind.singleton((i) => DoSaveCompletelyWordUseCase(i())),
         Bind.singleton((i) => SaveCompletelyWordImpl(i())),
         $CompletelyWordCubit,

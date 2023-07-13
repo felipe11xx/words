@@ -1,4 +1,3 @@
-import 'package:hive/hive.dart';
 import '../../shared/services/hive_service.dart';
 import '../data/model/user_history.dart';
 import '../domain/error/failure_user_history.dart';
@@ -21,8 +20,9 @@ class DoSaveUserHistoryDatasourceInternal implements IDoSaveUserHistoryDatasourc
               ...userHistory.wordHistory,
               word ?? ''
             ];
-            userHistoricBox.put(
-                userId, UserHistory(userId: userId, wordHistory: upUserHistory));
+
+            userHistory.wordHistory = upUserHistory;
+            userHistoricBox.put(userId, userHistory);
           }
         } else {
           userHistoricBox.put(userId,
