@@ -78,7 +78,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     isEnable: isEnable,
                     onTap: () {
                       context.read<SignUpCubit>().doSignUp(
-                          SignInRequest(_tPassword.text, _tEmail.text));
+                          SignInRequest(password:_tPassword.text,email: _tEmail.text));
                     },
                     textButton: Strings.signUp,
                     fit: BoxFit.fitWidth,

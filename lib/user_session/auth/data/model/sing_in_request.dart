@@ -3,5 +3,5 @@ class SignInRequest{
   String email;
   String password;
 
-  SignInRequest(this.password, this.email);
+  SignInRequest({required this.password,required this.email});
 }

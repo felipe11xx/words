@@ -140,7 +140,7 @@ class _SignInPageState extends State<SignInPage> {
                     isEnable: isEnable,
                     onTap: () {
                       context.read<SignInCubit>().doSignIn(
-                          SignInRequest(_tPassword.text, _tEmail.text));
+                          SignInRequest(password :_tPassword.text,email:_tEmail.text));
                     },
                     textButton: Strings.signIn,
                     fit: BoxFit.fitWidth,
