@@ -108,7 +108,7 @@
 
 * All actual Tests are Pass ![image](https://github.com/striker2x2/words/assets/6660920/f6fb7bfd-63c4-43d4-955a-f945f6f2e209)
 
-* don't wory more tests are coming soon :D
+* don't worry more tests are coming soon :D
 
 ## Creators
 
