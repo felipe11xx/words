@@ -30,25 +30,26 @@ class _HomePageState extends State<HomePage> {
       length: 3,
       child: Scaffold(
         drawer: Drawer(
-          backgroundColor: AppColors.secondary_light[200],
+          backgroundColor: AppColors.secondary_light[600],
           child: ListView(
             children: [
               ListTile(
                 leading: const Icon(
                   Icons.email_outlined,
+                  color: AppColors.white,
                 ),
                 title: Text(
                   context.read<HomeCubit>().getUserEmail() ?? '',
-                  style: AppTextStyles.labelSmall,
+                  style: AppTextStyles.labelSmall.copyWith(color: AppColors.white),
                 ),
               ),
               ListTile(
-                leading: const Icon(Icons.exit_to_app),
+                leading: const Icon(Icons.exit_to_app,color: AppColors.white,),
                 title: Text(
                   Strings.signOut,
-                  style: AppTextStyles.labelSmall,
+                  style: AppTextStyles.labelSmall.copyWith(color: AppColors.white),
                 ),
-                trailing: const Icon(Icons.arrow_forward),
+                trailing: const Icon(Icons.arrow_forward, color: AppColors.white,),
                 onTap: () {
                   context.read<HomeCubit>().signOut();
                 },

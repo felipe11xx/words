@@ -7,8 +7,6 @@ import 'package:words/shared/widgets/app_error_screen.dart';
 
 void main() {
   group('AppErrorScreen', () {
-    const error = 'Error message';
-    const buttonText = 'Retry';
 
     testWidgets('renders icon, error message, and button with default values', (WidgetTester tester) async {
       await tester.pumpWidget(
