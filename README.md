@@ -24,6 +24,7 @@
 - [Quick start](#quick-start)
 - [What's included](#whats-included)
 - [Frameworks](#frameworks)
+- [Unit Tests](#unit-tests)
 - [Creators](#creators)
 
 ## Quick start
@@ -101,6 +102,13 @@
 * <a href="https://github.com/ixsans/text_to_speech">text_to_speech</a> This repo uses text_to_speech for the user to hear the words on the dictionary screen
   * text_to_speech: ^0.2.3
 
+## Unit Tests
+* Actual coverage of test are ![image](https://github.com/striker2x2/words/assets/6660920/cccb3abf-7e29-4bbf-baaa-415f71941541)
+
+
+* All actual Tests are Pass ![image](https://github.com/striker2x2/words/assets/6660920/f6fb7bfd-63c4-43d4-955a-f945f6f2e209)
+
+* don't wory more tests are coming soon :D
 
 ## Creators
 
